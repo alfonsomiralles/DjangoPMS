@@ -31,6 +31,9 @@ python manage.py migrate
 # to init the server
 python manage.py runserver
 
+#to create superuser
+python manage.py createsuperuser
+
 ```
 
 ## License
