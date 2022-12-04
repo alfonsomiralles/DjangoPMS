@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Perfil{% endblock 'title' %}
+
+{% block 'content' %}
+<h1>Mi perfil</h1>
+
+<ul class="list">
+   {% for profile in profiles  %}
+       <li>{{ profile }}
+           <span>
+            <a href={% url 'profile_view' id=profile.id %} class="btn btn-detail">Ver</a> 
+            <a href={% url 'profile_edit' id=profile.id %} class="btn btn-edit">Editar</a>
+            <a href={% url 'profile_delete' id=profile.id %} class="btn btn-delete">Borrar</a>
+           </span>
+       </li>
+   {% endfor %}
+
+</ul>
+{% endblock 'content' %}

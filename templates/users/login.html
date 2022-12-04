@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Login{% endblock 'title' %}
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block 'content' %}
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <table>
+	    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Login" class="btn-login" />
+</form>  
+{% endblock 'content' %}
