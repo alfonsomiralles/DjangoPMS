@@ -1,0 +1,71 @@
+input {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid var(--color-text);
+    padding: 5px;
+    width: 100%;
+}
+
+.btn-send {
+    width: 79%;
+    background-color: var(--color-primary);
+    color: white;
+    border: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.btn-register {
+    width: 26%;
+    background-color: var(--color-primary);
+    color: white;
+    border: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    justify-content: flex-start;
+}
+.btn-login {
+    width: 40%;
+    background-color: var(--color-primary);
+    color: white;
+    border: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    justify-content: flex-start;
+}
+.btn-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.aux-btns-form {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+
+}
+
+.aux-btns-form a {
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+.notification {
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 0.9rem;
+  }
+  .success {
+    background: #43DC7E;
+    color: white;
+  }
+  .error {
+    background: #AB3444;
+    color: white;
+    margin-bottom: 20px;
+  }

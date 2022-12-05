@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Tarea {{ profile.username }}{% endblock 'title' %}
+
+{% block 'content' %}
+
+<span class="aux-btns"><a href="{% url 'profile' %}">Volver atrás</a></span>
+<ul class="list">
+   <li><b>Usuario: </b>{{ profile.username }}</li>
+   <li><b>Nombre: </b>{{ profile.first_name }}</li>
+   <li><b>Apellidos: </b>{{ profile.last_name}}</li>
+   <li><b>Email: </b>{{ profile.email }}</li>
+</ul>
+{% endblock 'content' %}

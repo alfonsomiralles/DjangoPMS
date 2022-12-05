@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Registro{% endblock 'title' %}
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+{% block 'content' %}
+<form action="{% url 'register' %}" method="POST">
+    {% csrf_token %}
+    <table>
+	    {{ form.as_table }}
+    </table>
+    <input type="submit" value="Registar" class="btn-register" />
+</form>  
+{% endblock 'content' %}

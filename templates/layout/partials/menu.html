@@ -1,0 +1,10 @@
+<nav>
+    <ul>
+        {% if request.user.is_authenticated %}
+        <li><a href="{% url 'profile' %}">Perfil</a></li>
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+        <li><a href="{% url 'users' %}">Inicio</a></li>
+        {% endif %}
+    </ul>
+</nav>
