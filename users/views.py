@@ -4,6 +4,8 @@ from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django.views import generic
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from .forms import UpdateUserForm
 # Create your views here.
 
 
@@ -28,7 +30,7 @@ def register(request):
     }
     return render(request, 'users/register.html', context)
 
-
+@login_required
 def profile(request):
     current_user = request.user
     context = {
@@ -36,7 +38,7 @@ def profile(request):
     }
     return render(request,'users/profile.html',context)
 
-
+@login_required
 def view(request, id):
     profile = User.objects.get(id=id)
     context = {
@@ -44,29 +46,23 @@ def view(request, id):
     }
     return render(request,'users/detail.html',context)   
 
-
+@login_required
 def edit(request, id):
-    profile = User.objects.get(id=id)
-    if request.method == 'GET':
-        form = UserChangeForm(instance = profile)
-        context = {
-            'form': form,
-            'id': id
-        }
-        return render(request,'users/edit.html',context)
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-        messages.success(request, 'Perfil actualizado') 
-        context = {
-            'form': form,
-            'id': id
-        } 
-        return render(request,'users/edit.html',context)  
+        user_form = UpdateUserForm(request.POST, instance=request.user)
 
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Perfil actualizado')
+            return redirect(to='profile')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
 
+    return render(request, 'users/edit.html', {'user_form': user_form})
+
+@login_required
 def delete(request, id):
     todo = User.objects.get(id=id)
     todo.delete()
+    messages.success(request, 'Perfil eliminado')
     return redirect('index')         

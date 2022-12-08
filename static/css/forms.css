@@ -7,7 +7,7 @@ input {
 }
 
 .btn-send {
-    width: 79%;
+    width: 70%;
     background-color: var(--color-primary);
     color: white;
     border: 0;
@@ -41,10 +41,16 @@ input {
     justify-content: flex-end;
 }
 .aux-btns-form {
-    width: 50%;
+    width: 10%;
+    color: whitesmoke;
+    background-color: #04AA6D;
     display: flex;
     justify-content: center;
     margin: 10px;
+    border: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
 
 }
 

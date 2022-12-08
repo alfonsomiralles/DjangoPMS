@@ -1,10 +1,13 @@
 {% extends 'layout/base.html' %}
  
-{% block 'title' %}Tarea {{ profile.username }}{% endblock 'title' %}
-
+{% block 'title' %}{{ profile.username }}{% endblock 'title' %}
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
 {% block 'content' %}
-
-<span class="aux-btns"><a href="{% url 'profile' %}">Volver atrás</a></span>
+<h1>MI PERFIL</h1>
+<span class="aux-btns-form"><a href="{% url 'profile' %}">Volver atrás</a></span>
 <ul class="list">
    <li><b>Usuario: </b>{{ profile.username }}</li>
    <li><b>Nombre: </b>{{ profile.first_name }}</li>

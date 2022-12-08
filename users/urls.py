@@ -10,6 +10,6 @@ urlpatterns = [
     path('profile/', views.profile, name='profile'),
     path('profile/<int:id>', views.profile, name='profile'),
     path('view/<int:id>', views.view, name='profile_view'),
-    path('edit/<int:id>', views.delete, name='profile_edit'),
+    path('edit/<int:id>', views.edit, name='profile_edit'),
     path('delete/<int:id>', views.delete, name='profile_delete')
 ]
