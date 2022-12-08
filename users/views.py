@@ -30,9 +30,9 @@ def register(request):
 
 
 def profile(request):
-    profiles = User.objects.filter(username__contains=request.GET.get('search',''))
+    current_user = request.user
     context = {
-        'profiles': profiles
+        'current_user': current_user
     }
     return render(request,'users/profile.html',context)
 
