@@ -58,7 +58,7 @@ def edit(request, id):
         form = UserChangeForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-        messages.success(request, 'Tarea actualizada') 
+        messages.success(request, 'Perfil actualizado') 
         context = {
             'form': form,
             'id': id
