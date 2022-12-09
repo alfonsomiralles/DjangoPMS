@@ -104,6 +104,7 @@ main {
 .btn-edit{
     background-color: #ffce00;
     color: white;
+    margin: 10px;
 }
 
 .btn-edit:hover{
@@ -120,7 +121,17 @@ main {
     background-color: white;
     color: #a10e2e;
 }
+.btn-back{
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
 
+.btn-back:hover{
+    background-color: white;
+    color: var(--color-primary);
+}
 .search {
     margin: 20px;
     width: 50%;

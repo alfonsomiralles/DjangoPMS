@@ -14,7 +14,10 @@ input {
     padding: 5px;
     text-transform: uppercase;
     cursor: pointer;
+    
+    
 }
+
 .btn-register {
     width: 26%;
     background-color: var(--color-primary);

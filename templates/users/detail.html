@@ -7,7 +7,7 @@
 {% endblock %}
 {% block 'content' %}
 <h1>MI PERFIL</h1>
-<span class="aux-btns-form"><a href="{% url 'profile' %}">Volver atrás</a></span>
+<span class="btn-back"><a href="{% url 'profile' %}">Volver atrás</a></span>
 <ul class="list">
    <li><b>Usuario: </b>{{ profile.username }}</li>
    <li><b>Nombre: </b>{{ profile.first_name }}</li>
