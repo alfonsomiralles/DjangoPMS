@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from .forms import UpdateUserForm
+from django.contrib.auth import update_session_auth_hash
+from django.urls import reverse_lazy
+from .forms import SetPasswordForm
 # Create your views here.
 
 
@@ -47,7 +49,7 @@ def view(request, id):
     return render(request,'users/detail.html',context)   
 
 @login_required
-def edit(request, id):
+def edit(request,id):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
 
@@ -59,6 +61,7 @@ def edit(request, id):
         user_form = UpdateUserForm(instance=request.user)
 
     return render(request, 'users/edit.html', {'user_form': user_form})
+   
 
 @login_required
 def delete(request, id):
@@ -66,3 +69,19 @@ def delete(request, id):
     todo.delete()
     messages.success(request, 'Perfil eliminado')
     return redirect('index')         
+
+@login_required
+def password_change(request):
+    user = request.user
+    if request.method == 'POST':
+        form = SetPasswordForm(user, request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Contraseña actualizada con éxito")
+            return redirect('index')
+        else:
+            for error in list(form.errors.values()):
+                messages.error(request, error)
+
+    form = SetPasswordForm(user)
+    return render(request, 'users/password_change.html', {'form': form})  
