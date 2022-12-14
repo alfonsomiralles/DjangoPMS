@@ -82,8 +82,9 @@ main {
     border-bottom: 1px solid var(--color-text);
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
+
 
 .btn {
     padding: 5px 10px;
@@ -104,7 +105,6 @@ main {
 .btn-edit{
     background-color: #ffce00;
     color: white;
-    margin: 10px;
 }
 
 .btn-edit:hover{

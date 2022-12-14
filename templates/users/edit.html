@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block 'content' %}
-
+    <h1>Editar datos de usuario</h1>
     <span class="btn-back"><a href="{% url 'profile' %}">Volver atrás</a></span>
     <form method="POST">
         {% csrf_token %}
@@ -22,7 +22,7 @@
             {{ user_form.as_table }}
         </table>
             <div class="btn-wrapper">
-                <input type="submit" value="Enviar" class="btn-send" />
+                <input type="submit" value="Guardar" class="btn-save" />
             </div>
         
     </form>
