@@ -6,7 +6,9 @@ from django.contrib.auth import get_user_model
 class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = ('username','first_name','last_name','email',)
+        #fields = '__all__'
+        #exclude = ('password','last_login','is_superuser', 'is_staff','is_active','date_joined')
 
 class SetPasswordForm(SetPasswordForm):
     class Meta:

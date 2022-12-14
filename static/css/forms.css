@@ -14,8 +14,16 @@ input {
     padding: 5px;
     text-transform: uppercase;
     cursor: pointer;
-    
-    
+}
+
+.btn-save {
+    width: 70%;
+    background-color: #04AA6D;
+    color: white;
+    border: 0;
+    padding: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
 }
 
 .btn-register {
