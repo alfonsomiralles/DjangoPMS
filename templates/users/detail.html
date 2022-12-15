@@ -13,5 +13,8 @@
    <li><b>Nombre: </b>{{ profile.first_name }}</li>
    <li><b>Apellidos: </b>{{ profile.last_name}}</li>
    <li><b>Email: </b>{{ profile.email }}</li>
+   {% if profile.is_staff %}
+    <li><b>Publicar alojamientos: </b>Activado</li>
+   {% endif %}
 </ul>
 {% endblock 'content' %}
