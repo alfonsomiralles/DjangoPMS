@@ -33,22 +33,22 @@ def view(request, id):
 
 
 @login_required
+def edit(request, id):
+    if request.method == 'POST':
+        acc_form = AccommodationForm(request.POST, instance=request.user)
+
+        if acc_form.is_valid():
+            acc_form.save()
+            messages.success(request, 'Perfil actualizado')
+            return redirect(to='profile')
+    else:
+        acc_form = AccommodationForm(instance=request.user)
+
+    return render(request, 'accommodations/edit.html', {'acc_form': acc_form})
+
+
+@login_required
 def delete(request, id):
     accommodations = Accommodation.objects.get(id=id)
     accommodations.delete()
     return redirect('accommodations')
-
-
-
-def create(request):
-    if request.method == 'GET':
-        form = AccommodationForm()
-        context = {
-            'form': form
-        }
-        return render(request, 'accommodations/create.html', context)
-    if request.method == 'POST':
-        form = AccommodationForm(request.POST)
-        if form.is_valid():
-            form.save()
-        return redirect('accommodation')

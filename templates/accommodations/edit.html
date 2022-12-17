@@ -1,6 +1,6 @@
 {% extends 'layout/base.html' %}
  
-{% block 'title' %}Editar Tarea{% endblock 'title' %}
+{% block 'title' %}Editar Alojamiento{% endblock 'title' %}
 
 {% block 'styles' %}
     {% load static %}
@@ -8,23 +8,16 @@
 {% endblock %}
 
 {% block 'content' %}
-
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="alert-success"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-    <span class="aux-btns-form"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
-    <form action="{% url 'acc_edit' id=id %}" method="POST">
+    <h1>Editar datos de Alojamiento</h1>
+    <span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
+    <form method="POST">
         {% csrf_token %}
         <table>
-            {{ form.as_table }}
+            {{ acc_form.as_table }}
         </table>
-        <div class="btn-wrapper">
-            <input type="submit" value="Enviar" class="btn-send" />
-        </div>
+            <div class="btn-wrapper">
+                <input type="submit" value="Guardar" class="btn-save" />
+            </div>
+        
     </form>
 {% endblock 'content' %}
