@@ -2,9 +2,9 @@
     <ul>
         {% if request.user.is_authenticated %}
             <li><a href="#">Reservar</a></li>
-            <li><a href="{% url 'profile' %}">Mis Reservas</a></li>
+            <li><a href="#">Mis Reservas</a></li>
             {% if request.user.is_staff %}
-                <li><a href="#">Mis Alojamientos</a></li>
+                <li><a href={% url 'accommodation' %}>Mis Alojamientos</a></li>
             {% endif %}
             <li><a href="{% url 'profile' %}">Perfil</a></li>
         <hr>

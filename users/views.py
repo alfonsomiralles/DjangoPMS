@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import UpdateUserForm
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
-from .forms import SetPasswordForm
+from .forms import MySetPasswordForm
 # Create your views here.
 
 
@@ -74,7 +74,7 @@ def delete(request, id):
 def password_change(request):
     user = request.user
     if request.method == 'POST':
-        form = SetPasswordForm(user, request.POST)
+        form = MySetPasswordForm(user, request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, "Contraseña actualizada con éxito")
@@ -83,5 +83,5 @@ def password_change(request):
             for error in list(form.errors.values()):
                 messages.error(request, error)
 
-    form = SetPasswordForm(user)
+    form = MySetPasswordForm(user)
     return render(request, 'users/password_change.html', {'form': form})  
