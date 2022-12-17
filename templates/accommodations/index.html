@@ -1,0 +1,25 @@
+ 
+ {% extends 'layout/base.html' %}
+ 
+ {% block 'title' %}Alojamientos{% endblock 'title' %}
+
+ {% block 'content' %}
+ <h1>Alojamientos</h1>
+ {% include 'accommodations/partials/search.html' %}
+ <span class="aux-btns"><a href="{% url 'accommodation' %}">Ver todos</a><a href="#">Añadir</a></span>
+ <ul class="list">
+
+    {% for accommodation in accommodations  %}
+        {% if accommodation.user == request.user %}
+        <li>{{ accommodation }}
+            <span>
+                <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a> 
+                <a href="#">Editar</a>
+                <a href={% url 'acc_delete' id=accommodation.id %} class="btn btn-delete">Borrar</a>
+            </span>
+        </li>
+        {% endif %}
+    {% endfor %}
+
+ </ul>
+ {% endblock 'content' %}
