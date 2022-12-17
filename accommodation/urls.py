@@ -7,5 +7,6 @@ urlpatterns = [
     path('accommodation/', views.accommodation, name='accommodation'),
     path('accommodation/<int:id>', views.accommodation, name='accommodation'),
     path('edit/<int:id>', views.edit, name='acc_edit'),
+    path('create/<int:id>', views.create, name='acc_create'),
     path('delete/<int:id>', views.delete, name='acc_delete'),
 ]

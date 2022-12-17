@@ -6,7 +6,7 @@
  {% block 'content' %}
  <h1>Alojamientos</h1>
  {% include 'accommodations/partials/search.html' %}
- <span class="aux-btns"><a href="{% url 'accommodation' %}">Ver todos</a><a href="#">Añadir</a></span>
+ <span class="aux-btns"><a href="{% url 'accommodation' %}">Ver todos</a><a href="{% url 'acc_create' id=current_user.id %}">Añadir</a></span>
  <ul class="list">
 
     {% for accommodation in accommodations  %}

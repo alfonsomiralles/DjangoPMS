@@ -39,8 +39,11 @@ def edit(request, id):
 
         if acc_form.is_valid():
             acc_form.save()
-            messages.success(request, 'Perfil actualizado')
-            return redirect(to='profile')
+            messages.success(request, 'Alojamiento actualizado')
+            return redirect(to='accommodation')
+        else:
+            messages.error(request, 'El Alojamiento no ha podido ser modificado')
+            return redirect(to='accommodation')    
     else:
         acc_form = AccommodationForm(instance=request.user)
 
@@ -48,7 +51,26 @@ def edit(request, id):
 
 
 @login_required
+def create(request, id):
+    if request.method == 'POST':
+        form = AccommodationForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Alojamiento creado con éxito')
+            return redirect('accommodation')
+        else:
+            messages.error(request, 'El Alojamiento no ha podido ser creado')
+            return redirect('accommodation')
+    else:
+        form = AccommodationForm(instance=request.user)
+        context = {
+            'form': form
+        }
+    return render(request, 'accommodations/create.html', context)        
+
+
+@login_required
 def delete(request, id):
     accommodations = Accommodation.objects.get(id=id)
     accommodations.delete()
-    return redirect('accommodations')
+    return redirect('accommodation')

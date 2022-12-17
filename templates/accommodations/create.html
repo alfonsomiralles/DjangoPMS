@@ -17,10 +17,11 @@
     </ul>
     {% endif %}
 
-    <span class="aux-btns-form"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
-    <form action="{% url 'acc_create' %}" method="POST" enctype="multipart/form-data">
+    <span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
+    <form  method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <table>
+            
             {{ form.as_table }}
         </table>
         <div class="btn-wrapper">
