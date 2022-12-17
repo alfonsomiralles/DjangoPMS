@@ -105,6 +105,8 @@ main {
 .btn-edit{
     background-color: #ffce00;
     color: white;
+    text-decoration: none;
+    margin: 10px;
 }
 
 .btn-edit:hover{
@@ -121,14 +123,16 @@ main {
     background-color: white;
     color: #a10e2e;
 }
-.btn-back{
+.btn-back a{
+    display: flex;
+    justify-content: flex-start;
     background-color: var(--color-primary);
     color: white;
     text-decoration: none;
     margin: 10px;
 }
 
-.btn-back:hover{
+.btn-back a:hover{
     background-color: white;
     color: var(--color-primary);
 }
@@ -166,8 +170,18 @@ main {
 }
 
 .aux-btns a {
+    background-color: var(--color-primary);
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+    text-align: center;
     padding-right: 10px;
     text-decoration: none;
+}
+
+.aux-btns a:hover {
+    background-color: white;
+    color: var(--color-primary);
 }
 
 .alert-success {

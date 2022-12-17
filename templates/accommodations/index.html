@@ -14,7 +14,7 @@
         <li>{{ accommodation }}
             <span>
                 <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a> 
-                <a href="#">Editar</a>
+                <a href={% url 'acc_edit' id=accommodation.id %} class="btn btn-edit">Editar</a>
                 <a href={% url 'acc_delete' id=accommodation.id %} class="btn btn-delete">Borrar</a>
             </span>
         </li>
