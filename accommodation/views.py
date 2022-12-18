@@ -34,20 +34,23 @@ def view(request, id):
 
 @login_required
 def edit(request, id):
+    accommodation = Accommodation.objects.get(id=id)
     if request.method == 'POST':
-        acc_form = AccommodationForm(request.POST, instance=request.user)
-
-        if acc_form.is_valid():
-            acc_form.save()
+        form = AccommodationForm(request.POST,instance=accommodation)
+        if form.is_valid():
+            form.save()
             messages.success(request, 'Alojamiento actualizado')
             return redirect(to='accommodation')
         else:
             messages.error(request, 'El Alojamiento no ha podido ser modificado')
             return redirect(to='accommodation')    
     else:
-        acc_form = AccommodationForm(instance=request.user)
-
-    return render(request, 'accommodations/edit.html', {'acc_form': acc_form})
+        form = AccommodationForm(instance=accommodation)
+        context = {
+            'form':form,
+            'id':id
+        }
+    return render(request, 'accommodations/edit.html', context)
 
 
 @login_required
