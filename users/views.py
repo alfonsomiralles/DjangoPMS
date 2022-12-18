@@ -21,7 +21,7 @@ def register(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Usuario creado con éxito')
-            return redirect('index')
+            return redirect('login')
         else:
             messages.error(request, 'El Usuario no ha podido ser creado')
             return redirect('register')
