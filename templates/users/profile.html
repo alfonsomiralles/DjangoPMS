@@ -10,7 +10,7 @@
            <span>
             <a href={% url 'profile_view' id=current_user.id %} class="btn btn-detail">Ver</a> 
             <a href={% url 'profile_edit' id=current_user.id %} class="btn btn-edit">Editar</a>
-            <a href={% url 'profile_delete' id=current_user.id %} class="btn btn-delete">Borrar</a>
+            <a href={% url 'profile_delete' id=current_user.id %} onclick="return confirm('¿Estás seguro de querer borrar este usuario?. Si lo haces se borrará toda la información vinculada.')" class="btn btn-delete">Borrar</a>
            </span>
         </li>
        </li>
