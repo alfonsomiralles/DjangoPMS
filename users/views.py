@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,PasswordResetForm
 from django.contrib.auth.models import User
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
@@ -8,6 +8,7 @@ from .forms import UpdateUserForm
 from django.contrib.auth import update_session_auth_hash
 from django.urls import reverse_lazy
 from .forms import MySetPasswordForm
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -85,3 +86,6 @@ def password_change(request):
 
     form = MySetPasswordForm(user)
     return render(request, 'users/password_change.html', {'form': form})  
+
+def password_reset(request):
+    return render(request, 'password_reset_form.html')  

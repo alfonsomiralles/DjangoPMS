@@ -31,15 +31,14 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'users',
+    'accommodation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'users',
-    'crispy_forms',
-    'accommodation',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +56,7 @@ ROOT_URLCONF = 'DjangoPMS.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,7 +78,7 @@ WSGI_APPLICATION = 'DjangoPMS.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pms',
+        'NAME': 'pms1',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': '127.0.0.1',
@@ -138,4 +137,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'
+LOGOUT_REDIRECT_URL = 'index'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'pmsdjango@gmail.com'
+#EMAIL_HOST_PASSWORD = 'pmsdjango22*-'
+EMAIL_HOST_PASSWORD = 'gisknpxdvtrnjlwp'
+EMAIL_FILE_PATH = BASE_DIR / '"static" / "emails"'
 
