@@ -135,7 +135,7 @@ MEDIA_ROOT = BASE_DIR / "static" / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
 
@@ -144,8 +144,5 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = 'pmsdjango@gmail.com'
-#EMAIL_HOST_PASSWORD = 'pmsdjango22*-'
-EMAIL_HOST_PASSWORD = 'gisknpxdvtrnjlwp'
-#EMAIL_FILE_PATH = BASE_DIR / "static" / "emails"
+
 

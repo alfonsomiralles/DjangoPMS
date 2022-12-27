@@ -89,3 +89,16 @@ def password_change(request):
 
 def password_reset(request):
     return render(request, 'password_reset_form.html')  
+
+
+def request_staff(request):
+  if request.method == 'POST':
+    name = request.POST.get('name')
+    email = request.POST.get('email')
+    subject = 'Solicitud de ser parte del staff'
+    message = f'Hola, mi nombre es {name} y mi correo electrónico es {email}. Me gustaría solicitar ser parte del staff para poder publicar mis alojamientos en el sistema.'
+    messages.success(request, f"Solicitud enviada. Pronto contactaremos con {name}")
+    send_mail(subject, message, 'pmsdjango@gmail.com', ['pmsdjango@gmail.com'])
+    return redirect('index')
+  else:
+    return render(request, 'index.html')    
