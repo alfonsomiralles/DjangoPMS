@@ -147,5 +147,5 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'pmsdjango@gmail.com'
 #EMAIL_HOST_PASSWORD = 'pmsdjango22*-'
 EMAIL_HOST_PASSWORD = 'gisknpxdvtrnjlwp'
-EMAIL_FILE_PATH = BASE_DIR / '"static" / "emails"'
+#EMAIL_FILE_PATH = BASE_DIR / "static" / "emails"
 

@@ -1,12 +1,26 @@
-{% extends 'layout/base.html' %}
-
-{% block 'title' %}Inicio{% endblock %}
-
-{% block 'content' %}
-    <h1>PROPERTY MANAGEMENT SYSTEM</h1>
-    <div class="cards">
-        <a href="{% url 'login' %}" class="card">LOGIN</a>
-        <a href="{% url 'register' %}" class="card">REGISTRO</a>
-        <a href="{% url 'password_reset' %}" class="card">¿Has olvidado tu contraseña?</a>
+{% extends 'layout/base.html' %} {% block 'title' %}Dashboard{% endblock %} 
+{%block 'content' %}
+<div class="dashboard-container">
+    <h1>Bienvenido a Property Management System</h1>
+    <h2>Sistema de reserva de Hoteles y alojamientos.</h2>
+    {% if user.is_authenticated %}
+    <div class="dashboard-card">
+      <h2><i class="fas fa-calendar-plus"></i> Reservar</h2>
+      <p>Desde aquí puedes realizar una nueva reserva de un hotel o alojamiento.</p>
+      <a href="#" class="button">Reservar ahora</a>
     </div>
+    <div class="dashboard-card">
+      <h2><i class="fas fa-user-edit"></i> Editar perfil</h2>
+      <p>Accede a tu perfil y modifica tus datos personales.</p>
+      <a href="{% url 'profile' %}" class="button">Perfil</a>
+    </div>
+        {% if user.is_staff %}
+        <div class="dashboard-card">
+            <h2><i class="fas fa-hotel"></i> Mis alojamientos</h2>
+            <p>Gestiona tus alojamientos y realiza nuevas reservas.</p>
+            <a href="{% url 'accommodation' %}" class="button">Ver alojamientos</a>
+        </div>
+        {% endif %}
+    {% endif %}    
+  </div>
 {% endblock 'content' %}
