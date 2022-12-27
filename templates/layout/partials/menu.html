@@ -1,17 +1,52 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+{% if user.is_authenticated %}
 <nav>
-    <ul>
-        {% if request.user.is_authenticated %}
-            <li><a href="#">Reservar</a></li>
-            <li><a href="#">Mis Reservas</a></li>
-            {% if request.user.is_staff %}
-                <li><a href={% url 'accommodation' %}>Mis Alojamientos</a></li>
-            {% endif %}
-            <li><a href="{% url 'profile' %}">Perfil</a></li>
-        <hr>
-        </hr>
-        <li><a href="{% url 'logout' %}">Logout</a></li>
-        {% else %}
-        <li><a href="{% url 'users' %}">Inicio</a></li>
-        {% endif %}
-    </ul>
+  <ul>
+    <li style="flex: 2">
+      <a href="{% url 'index' %}"
+        ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+      >
+    </li>
+    <li style="flex: 2">
+      <a href="#"
+        ><i class="fas fa-calendar-plus"></i> Reservar</a
+      >
+    </li>
+    <li style="flex: 1">
+      <a href="{% url 'profile' %}"
+        ><i class="fas fa-user-edit"></i> Perfil</a
+      >
+    </li>
+    {% if user.is_staff %}
+    <li style="flex: 1">
+      <a href="{% url 'accommodation' %}"
+        ><i class="fas fa-hotel"></i> Mis alojamientos</a
+      >
+    </li>
+    {% endif %}
+    <li style="flex: 1">
+      <a href="{% url 'logout' %}"
+        ><i class="fas fa-sign-out-alt"></i> Logout</a
+      >
+    </li>
+  </ul>
 </nav>
+{% else %}
+<nav>
+  <ul>
+    <li style="flex: 2">
+      <a href="{% url 'index' %}"
+        ><i class="fas fa-tachometer-alt"></i> Dashboard</a
+      >
+    </li>
+    <li style="flex: 1">
+      <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </li>
+    <li style="flex: 1">
+      <a href="{% url 'password_reset' %}"
+        ><i class="fas fa-unlock-alt"></i> Forgot password</a
+      >
+    </li>
+  </ul>
+</nav>
+{% endif %}
