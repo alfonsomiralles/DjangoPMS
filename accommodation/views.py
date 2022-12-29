@@ -58,7 +58,7 @@ def edit(request, id):
 class AccommodationCreate(LoginRequiredMixin,CreateView):
     model = Accommodation
     form = AccommodationForm
-    fields = ['name','description','address','email','phone','mobile','image','is_active','country','city',]
+    fields = ['name','description','address','email','phone','mobile','image','is_active','country','city','price',]
     success_url = reverse_lazy('accommodation')
     success_message = 'Alojamiento creado con éxito!'
     error_message = 'Se ha producido un error. Alojamiento no creado'

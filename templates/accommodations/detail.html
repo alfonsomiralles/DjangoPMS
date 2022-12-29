@@ -4,7 +4,6 @@
 
 {% block 'content' %}
 
-<span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
 <ul class="list">
    <li><img src ="{{ accommodations.image.url }}"width="250" height="250"></li>
    <li><b>Nombre: </b>{{ accommodations.name }}</li>
@@ -16,5 +15,6 @@
    <li><b>País: </b>{{ accommodations.country}}</li>
    <li><b>Ciudad: </b>{{ accommodations.city}}</li>
    <li><b>Publicado: </b>{{ accommodations.is_active}}</li>
+   <li><b>Precio por noche: </b>{{ accommodations.price}}</li>
 </ul>
 {% endblock 'content' %}

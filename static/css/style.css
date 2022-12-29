@@ -1,5 +1,5 @@
 :root {
-    --color-primary:#2ea3f2 ;
+    --color-primary: #2ea3f2;
     --color-text: #666;
     --font-main: Roboto-bold;
     --font-text: Roboto-regular;
@@ -24,39 +24,45 @@
     src: url('../fonts/Roboto-Regular.ttf')
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-main);
 }
+
 /* End Main settings */
 
 /* Layout settings */
 nav {
-    background-color: rgb(25, 41, 189);
-  }
+    background-color: rgb(14, 22, 99);
+}
 
-  nav ul {
+nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
-  }
+}
 
-  nav li {
+nav li {
     flex: 1;
-  }
+}
 
-  nav a {
+nav a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-  }
+}
 
-  nav a:hover {
-    background-color: #111;
-  }
-  
+nav a:hover {
+    background-color: rgb(34, 68, 203);
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -90,38 +96,39 @@ main {
     text-decoration: none;
 }
 
-.btn-detail{
+.btn-detail {
     background-color: var(--color-primary);
     color: white;
 }
 
-.btn-detail:hover{
+.btn-detail:hover {
     background-color: white;
     color: var(--color-primary);
 }
 
-.btn-edit{
+.btn-edit {
     background-color: #ffce00;
     color: white;
     text-decoration: none;
     margin: 10px;
 }
 
-.btn-edit:hover{
+.btn-edit:hover {
     background-color: white;
     color: #ffce00;
 }
 
-.btn-delete{
+.btn-delete {
     background-color: #a10e2e;
     color: white;
 }
 
-.btn-delete:hover{
+.btn-delete:hover {
     background-color: white;
     color: #a10e2e;
 }
-.btn-back a{
+
+.btn-back a {
     display: flex;
     justify-content: flex-start;
     background-color: var(--color-primary);
@@ -130,10 +137,11 @@ main {
     margin: 10px;
 }
 
-.btn-back a:hover{
+.btn-back a:hover {
     background-color: white;
     color: var(--color-primary);
 }
+
 .search {
     margin: 20px;
     width: 50%;
@@ -154,7 +162,7 @@ main {
     cursor: pointer;
 }
 
-.btn-search:hover{
+.btn-search:hover {
     background-color: white;
     color: var(--color-primary)
 }
@@ -188,6 +196,7 @@ main {
     background-color: green;
     color: white;
 }
+
 .notification {
     text-align: center;
     padding: 10px;
@@ -196,13 +205,15 @@ main {
     color: #fff;
     font-size: 0.9rem;
     margin-bottom: 20px;
-  }
-  .success {
+}
+
+.success {
     background-color: #43DC7E;
-  }
-  .error {
+}
+
+.error {
     background-color: #AB3444;
-  }
+}
 
 /* End Layout settings */
 
@@ -214,9 +225,9 @@ main {
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
-  }
-  
-  .dashboard-card {
+}
+
+.dashboard-card {
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -224,14 +235,82 @@ main {
     padding: 20px;
     text-align: center;
     width: 100%;
-  }
-  
-  .dashboard-card h2 {
+}
+
+.dashboard-card h2 {
     margin: 0 0 10px 0;
-  }
-  
-  h1 {
+}
+
+h1 {
     margin: 20px 0 10px 0;
-  }
-  
+}
+
 /* END INDEX */
+
+/* INVOICE */
+.invoice-container {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 20px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th {
+    background-color: #f5f5f5;
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ccc;
+    font-weight: bold;
+}
+
+td {
+    padding: 8px;
+    border: 1px solid #ccc;
+}
+
+p {
+    margin: 0;
+}
+
+.company-details {
+    float: left;
+    width: 40%;
+}
+
+.client-details {
+    float: right;
+    width: 40%;
+    text-align: right;
+}
+
+.invoice-details {
+    width: 100%;
+    text-align: right;
+}
+
+.reservation-details {
+    width: 100%;
+}
+
+.payment-details {
+    width: 100%;
+    text-align: right;
+}
+
+/* END invoice-container */
