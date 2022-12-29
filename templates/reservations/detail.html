@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Detalle de la reserva {{ reservations.id }}{% endblock 'title' %}
+
+{% block 'content' %}
+
+<ul class="list">
+   <li><img src ="{{ reservations.accommodation.image.url }}"width="250" height="250"></li>
+   <li><b>Nombre del Hotel: </b>{{ reservations.accommodation.name }}</li>
+   <li><b>Fecha de entrada: </b>{{ reservations.start_date }}</li>
+   <li><b>Fecha de salida: </b>{{ reservations.end_date }}</li>
+   <li><b>Precio por noche: </b>{{ reservations.accommodation.price|floatformat:2}} €</li>
+   <li><b>Total noches: </b>{{ number_of_nights}}</li>
+   <li><b>Precio total: </b>{{ reservations.total_price|floatformat:2 }} €</li>
+</ul>
+{% endblock 'content' %}
