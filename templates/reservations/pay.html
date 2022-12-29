@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Make payment{% endblock 'title' %}
+
+{% block 'content' %}
+
+<h1>Make payment</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Pay</button>
+</form>
+{% endblock 'content' %}

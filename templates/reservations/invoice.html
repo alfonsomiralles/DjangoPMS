@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Invoice{% endblock 'title' %}
+
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+<div class="invoice-container">
+    <div class="header">
+        <div class="company-details">
+            <h2>Company details</h2>
+            <p>Empresa: Property Management System</p>
+            <p>Dirección: Calle Madrid, 5</p>
+            <p>Ciudad: Alicante</p>
+            <p>Código Postal: 03007</p>
+            <p>CIF: BXXXXXXXX</p>
+        </div>
+        <div class="client-details">
+            <h2>Client details</h2>
+            <p>Nombre de usuario: {{ reservation.user.username }}</p>
+            <p>Nombre: {{ reservation.user.first_name }}</p>
+            <p>Apellidos: {{ reservation.user.last_name }}</p>
+            <p>Email: {{ reservation.user.email }}</p>
+        </div>
+    </div>
+    <div class="invoice-details">
+        <h2>Invoice details</h2>
+        <p>Fecha factura: {{ payment.created_at }}</p>
+        <p>Factura nº: {{ reservation.id }}</p>
+    </div>
+    <div class="reservation-details">
+        <h2>Reservation details</h2>
+        <p>Hotel: {{ reservation.accommodation.name }}</p>
+        <p>User: {{ reservation.user.username }}</p>
+        <p>Start date: {{ reservation.start_date }}</p>
+        <p>End date: {{ reservation.end_date }}</p>
+        <p>Number of nights: {{ number_of_nights }}</p>
+        <p>Amount: {{ payment.amount }}</p>
+    </div>
+    <div class="payment-details">
+        <h2>Payment details</h2>
+        <p>Payment method: {{ payment.payment_method }}</p>          
+        <p>Status: {{ payment.status }}</p>
+        <p>Total price: {{ reservation.total_price }}</p>
+    </div>
+</div>
+
+{% endblock 'content' %}
