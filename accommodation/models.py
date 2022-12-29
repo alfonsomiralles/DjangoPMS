@@ -54,6 +54,8 @@ class Reservation(models.Model):
     def __str__(self):
         return f'Reservation made for Accommodation {self.accommodation.name}'
 
+        
+
 class Payment(models.Model):
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
     payment_method = models.CharField(max_length=20)

@@ -5,7 +5,7 @@ from django.forms import DateInput
 class ReservationForm(forms.ModelForm):
     class Meta:
         model = Reservation
-        fields = ['start_date', 'end_date']
+        fields = ['start_date', 'end_date',]
 
     def __init__(self, *args, **kwargs):
         super(ReservationForm, self).__init__(*args, **kwargs)

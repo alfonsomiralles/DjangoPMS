@@ -2,10 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from accommodation.models import Accommodation, Reservation, Payment
 from django.contrib import messages
 from .forms import ReservationForm, PaymentForm
-from django.http import HttpResponse
-from django.template.loader import render_to_string
-import pdfkit
 from django.contrib.auth.decorators import login_required
+from decimal import Decimal
 
 # Create your views here.
 
@@ -62,7 +60,7 @@ def pay(request, id):
             payment = Payment.objects.create(
                 reservation=reservation,
                 payment_method=payment_method,
-                amount=reservation.total_price,
+                amount=reservation.accommodation.price,
                 status=payment_status
             )
             paymentid = payment.pk
@@ -80,9 +78,65 @@ def invoice(request, id):
     payment = get_object_or_404(Payment, id=id)
     reservation = payment.reservation
     number_of_nights = (reservation.end_date - reservation.start_date).days
+    net_total_price = (reservation.total_price / Decimal(1.21))
     context = {
         'payment': payment,
         'reservation': reservation,
-        'number_of_nights': number_of_nights
+        'number_of_nights': number_of_nights,
+        'net_total_price': net_total_price,
     }
     return render(request, 'reservations/invoice.html', context)
+
+@login_required
+def reservations(request):
+    current_user = request.user
+    reservations = Reservation.objects.filter(
+        id__contains=request.GET.get('search', ''))
+    context = {
+        'current_user': current_user,
+        'reservations': reservations
+    }
+    return render(request, 'reservations/reservations.html', context)  
+
+@login_required
+def reservations_view(request, id):
+    reservations = Reservation.objects.get(id=id)
+    number_of_nights = (reservations.end_date - reservations.start_date).days
+    context = {
+        'reservations': reservations,
+        'number_of_nights': number_of_nights,
+    }
+    return render(request, 'reservations/detail.html', context)  
+
+@login_required
+def reservations_edit(request, id):
+    # Get the reservation object
+    reservation = get_object_or_404(Reservation, pk=id)
+
+    if request.method == 'POST':
+        # Bind the form to the POST data
+        form = ReservationForm(request.POST, instance=reservation)
+        if form.is_valid():
+            # Save the updated reservation
+            form.save()
+            messages.success(request, 'Reserva actualizada')
+            return redirect(to='reservations')
+        else:
+            messages.error(request, 'La reserva no ha podido ser modificada')
+            return redirect(to='reservations')    
+    else:
+        # Display the form for editing the reservation
+        form = ReservationForm(instance=reservation)
+        context = {
+            'form': form,
+            'id': id
+        }
+    return render(request, 'reservations/edit.html', context)    
+
+
+@login_required
+def reservations_delete(request, id):
+    reservations = Reservation.objects.get(id=id)
+    reservations.delete()
+    messages.success(request, 'Reserva cancelada')
+    return redirect('reservations')      

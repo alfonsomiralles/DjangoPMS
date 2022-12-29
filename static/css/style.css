@@ -106,6 +106,16 @@ main {
     color: var(--color-primary);
 }
 
+.btn-reserve {
+    background-color: #1f8422;
+    color: white;
+}
+
+.btn-reserve:hover {
+    background-color: white;
+    color: #1f8422;
+}
+
 .btn-edit {
     background-color: #ffce00;
     color: white;
@@ -248,69 +258,70 @@ h1 {
 /* END INDEX */
 
 /* INVOICE */
+table.invoice {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table.invoice td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+table.invoice th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    background-color: #4870b3;
+    color: white;
+}
+
+table.invoice tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
 .invoice-container {
     width: 80%;
     margin: 0 auto;
-    border: 1px solid #ccc;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.5;
-    color: #555;
 }
 
-h1 {
-    text-align: center;
+.header {
     margin: 20px 0;
-    font-size: 20px;
-    color: #333;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 20px;
-}
-
-th {
-    background-color: #f5f5f5;
-    text-align: left;
-    padding: 8px;
-    border: 1px solid #ccc;
-    font-weight: bold;
-}
-
-td {
-    padding: 8px;
-    border: 1px solid #ccc;
-}
-
-p {
-    margin: 0;
 }
 
 .company-details {
+    width: 50%;
     float: left;
-    width: 40%;
 }
 
 .client-details {
+    width: 50%;
     float: right;
-    width: 40%;
     text-align: right;
 }
 
-.invoice-details {
-    width: 100%;
-    text-align: right;
-}
-
-.reservation-details {
-    width: 100%;
-}
-
+.invoice-details,
+.reservation-details,
 .payment-details {
+    margin: 20px 0;
+}
+
+.invoice-details table,
+.reservation-details table,
+.payment-details table {
     width: 100%;
-    text-align: right;
+}
+
+.invoice-details th,
+.reservation-details th,
+.payment-details th {
+    width: 25%;
+}
+
+.invoice-details td,
+.reservation-details td,
+.payment-details td {
+    width: 75%;
 }
 
 /* END invoice-container */

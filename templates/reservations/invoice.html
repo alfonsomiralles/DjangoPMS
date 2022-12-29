@@ -3,49 +3,90 @@
 {% block 'title' %}Invoice{% endblock 'title' %}
 
 {% block 'styles' %}
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
 {% endblock %}
 
 {% block 'content' %}
-<div class="invoice-container">
-    <div class="header">
-        <div class="company-details">
-            <h2>Company details</h2>
-            <p>Empresa: Property Management System</p>
-            <p>Dirección: Calle Madrid, 5</p>
-            <p>Ciudad: Alicante</p>
-            <p>Código Postal: 03007</p>
-            <p>CIF: BXXXXXXXX</p>
-        </div>
-        <div class="client-details">
-            <h2>Client details</h2>
-            <p>Nombre de usuario: {{ reservation.user.username }}</p>
-            <p>Nombre: {{ reservation.user.first_name }}</p>
-            <p>Apellidos: {{ reservation.user.last_name }}</p>
-            <p>Email: {{ reservation.user.email }}</p>
-        </div>
-    </div>
-    <div class="invoice-details">
-        <h2>Invoice details</h2>
-        <p>Fecha factura: {{ payment.created_at }}</p>
-        <p>Factura nº: {{ reservation.id }}</p>
-    </div>
-    <div class="reservation-details">
-        <h2>Reservation details</h2>
-        <p>Hotel: {{ reservation.accommodation.name }}</p>
-        <p>User: {{ reservation.user.username }}</p>
-        <p>Start date: {{ reservation.start_date }}</p>
-        <p>End date: {{ reservation.end_date }}</p>
-        <p>Number of nights: {{ number_of_nights }}</p>
-        <p>Amount: {{ payment.amount }}</p>
-    </div>
-    <div class="payment-details">
-        <h2>Payment details</h2>
-        <p>Payment method: {{ payment.payment_method }}</p>          
-        <p>Status: {{ payment.status }}</p>
-        <p>Total price: {{ reservation.total_price }}</p>
-    </div>
-</div>
 
-{% endblock 'content' %}
+<div class="invoice-container">
+  <div class="header">
+    <table class="invoice">
+      <tr>
+        <td class="company-details">
+          <h2>Datos empresa</h2>
+          <p>Empresa: Property Management System</p>
+          <p>Dirección: Calle Madrid, 5</p>
+          <p>Ciudad: Alicante</p>
+          <p>Código Postal: 03007</p>
+          <p>CIF: BXXXXXXXX</p>
+        </td>
+        <td class="client-details">
+          <h2>Datos del cliente</h2>
+          <p>Nombre de usuario: {{ reservation.user.username }}</p>
+          <p>Nombre: {{ reservation.user.first_name }}</p>
+          <p>Apellidos: {{ reservation.user.last_name }}</p>
+          <p>Email: {{ reservation.user.email }}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div class="invoice-details">
+    <table class="invoice">
+      <tr>
+        <td>
+          <h2>Datos de factura</h2>
+          <p>Fecha factura: {{ payment.created_at }}</p>
+          <p>Factura nº: {{ reservation.id }}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <div class="reservation-details">
+    <table class="invoice">
+      <tr>
+        <th style="width: 25%;">Hotel</th>
+        <td style="width: 75%;">{{ reservation.accommodation.name }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Fecha de entrada</th>
+        <td style="width: 75%;">{{ reservation.start_date }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Fecha de salida</th>
+        <td style="width: 75%;">{{ reservation.end_date }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Número de noches</th>
+        <td style="width: 75%;">{{ number_of_nights }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Importe por noche (IVA incluido)</th>
+        <td style="width: 75%;">{{ payment.amount|floatformat:2 }} €</td>
+      </tr>
+    </table>
+  </div>
+  <hr>
+  <div class="payment-details">
+    <table class="invoice">
+      <tr>
+        <th style="width: 25%;">Método de pago</th>
+        <td style="width: 75%;">{{ payment.payment_method }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Estado de pago</th>
+        <td style="width: 75%;">{{ payment.status }}</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Precio total sin IVA</th>
+        <td style="width: 75%;">{{ net_total_price|floatformat:2 }} €</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">Precio total de la reserva (IVA incluido)</th>
+        <td style="width: 75%;">{{ reservation.total_price|floatformat:2 }} €</td>
+      </tr>
+    </table>
+  </div>
+</div>
+{% endblock %}
