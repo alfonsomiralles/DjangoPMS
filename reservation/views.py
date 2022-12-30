@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from accommodation.models import Accommodation, Reservation, Payment
 from django.contrib import messages
-from .forms import ReservationForm, PaymentForm
+from .forms import ReservationForm, PaymentForm, SearchForm
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
 
@@ -9,6 +9,43 @@ from decimal import Decimal
 
 def index(request):
     return render(request, 'index.html', {})
+
+@login_required
+def search(request):
+    form = SearchForm()
+    return render(request, 'reservations/partials/searchdate.html', {'form': form})    
+
+@login_required
+def search_results(request):
+    # Mostrar todos los alojamientos al principio
+    accommodations = Accommodation.objects.filter(is_active=True)
+    start_date = None
+    end_date = None
+    country = None
+    city = None
+    # Si se ha enviado el formulario, procesar la búsqueda
+    if request.method == "POST":
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            start_date = form.cleaned_data["start_date"]
+            end_date = form.cleaned_data["end_date"]
+            country = form.cleaned_data["country"]
+            city = form.cleaned_data["city"]
+            # Filtrar los alojamientos disponibles en el rango de fechas especificado
+            if start_date and end_date:
+                reservations = Reservation.objects.filter(start_date__lte=end_date, end_date__gte=start_date)
+                accommodations = accommodations.filter(reservation__in=reservations)
+            if country:
+                accommodations = accommodations.filter(country=country)
+            if city:
+                accommodations = accommodations.filter(city=city)
+    # Enviar los alojamientos filtrados a la plantilla
+    context = {
+        'accommodations': accommodations,
+        'start_date': start_date,
+        'end_date': end_date
+    }
+    return render(request, 'accommodations/list.html', context)
 
 @login_required
 def accommodations_list(request):

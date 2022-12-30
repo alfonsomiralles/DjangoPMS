@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+
 {% if user.is_authenticated %}
 <nav>
   <ul>
@@ -8,7 +8,7 @@
       >
     </li>
     <li style="flex: 2">
-      <a href="{% url 'accommodationslist' %}"
+      <a href="{% url 'accommodationssearch' %}"
         ><i class="fas fa-calendar-plus"></i> Reservar</a
       >
     </li>
@@ -23,10 +23,14 @@
       >
     </li>
     {% if user.is_staff %}
-    <li style="flex: 1">
-      <a href="{% url 'accommodation' %}"
-        ><i class="fas fa-hotel"></i> Mis alojamientos</a
-      >
+    <li class="nav-item dropdown">
+      <div class="dropdown">
+        Gestión de Alojamientos
+        <div class="dropdown-content">
+          <a href="{% url 'accommodation' %}">Mis alojamientos</a>
+          <a href="{% url 'reservations' %}">Reservas en mis alojamientos</a>
+        </div>
+      </div>
     </li>
     {% endif %}
     <li style="flex: 1">

@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Búsqueda de alojamientos{% endblock 'title' %}
+
+{% block 'content' %}
+    <h1>Búsqueda de alojamientos</h1>
+    <p>Si se da al botón de buscar directamente aparecerán todos los alojamientos sin filtros de búsqueda.</p>
+    <br>
+    <form method="POST" action="{% url 'accommodationslist' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+{% endblock 'content' %}

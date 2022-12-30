@@ -325,3 +325,38 @@ table.invoice tr:nth-child(even) {
 }
 
 /* END invoice-container */
+
+.dropdown {
+    display: flex;
+    align-items: center;
+    background-color: rgb(14, 22, 99);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    top: 4%;
+    margin-top: 8px;
+    position: absolute;
+    background-color: rgb(34, 68, 203);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255,255,255,0.2);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}

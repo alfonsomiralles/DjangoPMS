@@ -52,7 +52,7 @@ class Reservation(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Reservation made for Accommodation {self.accommodation.name}'
+        return f'Reserva confirmada en: {self.accommodation.name}'
 
         
 
@@ -65,4 +65,4 @@ class Payment(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'Payment done for this Reservation'                
+        return f'Pago realizado'                
