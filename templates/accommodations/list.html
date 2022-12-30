@@ -1,20 +1,22 @@
 {% extends 'layout/base.html' %}
- 
-{% block 'title' %}Alojamientos{% endblock 'title' %}
+
+{% block 'title' %}Resultados de la búsqueda{% endblock 'title' %}
 
 {% block 'content' %}
-<h1>Alojamientos</h1>
+<h1>Realiza una reserva</h1>
 {% include 'accommodations/partials/search.html' %}
 <span class="aux-btns"><a href="{% url 'accommodation' %}">Ver todos</a></span>
 <ul class="list">
-
-   {% for accommodation in accommodations  %}
-           <li>{{ accommodation }}
-               <span>
-                   <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a>
-                   <a href={% url 'reserve' accommodation.id %} class="btn btn-reserve">Reservar</a> 
-               </span>
-           </li>
-   {% endfor %}
+    {% for accommodation in accommodations %}
+        <li>
+        <img src="{{ accommodation.image.url }}" width="100" height="100" alt="Imagen del alojamiento">
+        <h2>{{ accommodation.name }}</h2>
+        <p>Precio por noche: {{ accommodation.price }} €</p>
+            <span>
+                <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a>
+                <a href={% url 'reserve' accommodation.id %} class="btn btn-reserve">Reservar</a> 
+            </span>
+        </li>        
+    {% endfor %}
 </ul>
 {% endblock 'content' %}
