@@ -24,7 +24,11 @@
     src: url('../fonts/Roboto-Regular.ttf')
 }
 
-h1,
+/* Estilos para el título */
+h1 {
+    font-size: 2em;
+    color: blue;
+}
 h2,
 h3,
 h4,
@@ -72,6 +76,28 @@ main {
     align-items: center;
 }
 
+/* Estilos para el formulario */
+form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+form p {
+    margin-bottom: 10px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="text"], form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
 .list {
     display: flex;
     flex-direction: column;
@@ -94,6 +120,7 @@ main {
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
+    margin: 10px;
 }
 
 .btn-detail {
@@ -107,8 +134,10 @@ main {
 }
 
 .btn-reserve {
-    background-color: #1f8422;
+    background-color: green;
     color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .btn-reserve:hover {
@@ -140,12 +169,16 @@ main {
 
 .btn-back a {
     display: flex;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
     background-color: var(--color-primary);
     color: white;
+    text-align: center;
     text-decoration: none;
     margin: 10px;
+    padding: 10px;
 }
+
 
 .btn-back a:hover {
     background-color: white;
@@ -266,6 +299,7 @@ table.invoice {
 table.invoice td {
     border: 1px solid #ddd;
     padding: 8px;
+    width: 50%;
 }
 
 table.invoice th {
@@ -297,7 +331,7 @@ table.invoice tr:nth-child(even) {
 .client-details {
     width: 50%;
     float: right;
-    text-align: right;
+    text-align: left;
 }
 
 .invoice-details,
@@ -359,4 +393,10 @@ table.invoice tr:nth-child(even) {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+/* Estilos para la página */
+.list-item {
+    display: inline-block;
+    vertical-align: top;
 }

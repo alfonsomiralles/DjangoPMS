@@ -8,12 +8,18 @@
 {% endblock %}
 
 {% block 'content' %}
-<h1>Confirmar fechas de reserva</h1>
-<span class="btn-back"><a href="{% url 'accommodationslist' %}">Volver atrás</a></span>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <br>
-    <button type="submit" class="btn btn-reserve">Confirmar reserva</button>
-</form>
+<div class="container">
+    <h1>Confirmar fechas de reserva</h1>
+    <span class="btn-back"><a href="{% url 'accommodationslist' %}">Volver atrás</a></span>
+    <form method="post">
+        {% csrf_token %}
+        <div class="hotel-info">
+            <p>Hotel: {{ accommodation }}</p>
+            <p>Precio por noche: {{ accommodation.price|floatformat:2 }} €</p>
+        </div>
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-reserve">Confirmar reserva</button>
+    </form>
+</div>
 {% endblock 'content' %}

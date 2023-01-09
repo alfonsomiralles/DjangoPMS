@@ -33,5 +33,7 @@ class PaymentForm(forms.Form):
         ('bank_transfer', 'Bank Transfer'),
         ('at_hotel', 'Pay at Hotel')
     ])
+    start_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
 
   

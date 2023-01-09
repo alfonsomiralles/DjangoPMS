@@ -13,7 +13,7 @@
   <div class="header">
     <table class="invoice">
       <tr>
-        <td class="company-details">
+        <td class="company-details" colspan="2">
           <h2>Datos empresa</h2>
           <p>Empresa: Property Management System</p>
           <p>Dirección: Calle Madrid, 5</p>
@@ -21,7 +21,7 @@
           <p>Código Postal: 03007</p>
           <p>CIF: BXXXXXXXX</p>
         </td>
-        <td class="client-details">
+        <td class="client-details" colspan="2">
           <h2>Datos del cliente</h2>
           <p>Nombre de usuario: {{ reservation.user.username }}</p>
           <p>Nombre: {{ reservation.user.first_name }}</p>
@@ -81,6 +81,10 @@
       <tr>
         <th style="width: 25%;">Precio total sin IVA</th>
         <td style="width: 75%;">{{ net_total_price|floatformat:2 }} €</td>
+      </tr>
+      <tr>
+        <th style="width: 25%;">IVA (21%)</th>
+        <td style="width: 75%;">{{ iva|floatformat:2 }} €</td>
       </tr>
       <tr>
         <th style="width: 25%;">Precio total de la reserva (IVA incluido)</th>

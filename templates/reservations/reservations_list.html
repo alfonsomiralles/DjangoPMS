@@ -1,0 +1,38 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Reservas{% endblock 'title' %}
+
+{% block 'content' %}
+<h1>Reservas en mis alojamientos</h1>
+{% if accommodation_set.count == 0 %}
+    <p>No tienes alojamientos creados todavía.</p>
+{% else %}
+    {% if reservations.count == 0 %}
+        <p>No tienes reservas realizadas en tus alojamientos.</p>
+    {% else %}
+        <ul class="list">
+            {% for reservation in reservations  %}
+                <li>
+                    <div class="list-item">
+                        <img src="{{ reservation.accommodation.image.url }}" width="100" height="100">
+                    </div>
+                    <div class="list-item">
+                        <p><strong>Alojamiento:</strong> {{ reservation.accommodation.name }}</p>
+                        <p><strong>Fecha de entrada:</strong> {{ reservation.start_date }}</p>
+                        <p><strong>Fecha de salida:</strong> {{ reservation.end_date }}</p>
+                        <p><strong>Usuario que realizó la reserva:</strong> {{ reservation.user.username }}</p>
+                    </div>
+                    <div class="list-item">
+                        <span>
+                            <a href={% url 'reservations_view' id=reservation.id %} class="btn btn-detail">Ver</a> 
+                            <a href={% url 'invoice' id=reservation.id %} class="btn btn-detail">Ver Factura</a> 
+                            <a  href={% url 'reservations_delete' id=reservation.id %} onclick="return confirm('¿Estás seguro de querer cancelar la reserva?')" class="btn btn-delete">Cancelar Reserva</a>
+                        </span>
+                    </div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
+{% endblock 'content' %}
