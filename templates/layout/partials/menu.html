@@ -28,7 +28,7 @@
         Gestión de Alojamientos
         <div class="dropdown-content">
           <a href="{% url 'accommodation' %}">Mis alojamientos</a>
-          <a href="{% url 'reservations' %}">Reservas en mis alojamientos</a>
+          <a href="{% url 'reservations_list' %}">Reservas en mis alojamientos</a>
         </div>
       </div>
     </li>
@@ -50,6 +50,9 @@
     </li>
     <li style="flex: 1">
       <a href="{% url 'login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+    </li>
+    <li style="flex: 1">
+      <a href="{% url 'register' %}"><i class="fas fa-sign-in-alt"></i> Registrarse</a>
     </li>
     <li style="flex: 1">
       <a href="{% url 'password_reset' %}"

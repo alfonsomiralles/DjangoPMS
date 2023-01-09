@@ -6,14 +6,16 @@
  {% block 'content' %}
  <h1>Mis reservas</h1>
  <ul class="list">
+    
 
     {% for reservation in reservations  %}
         {% if reservation.user == request.user %}
-            <li>{{ reservation }}
+            <li>
+                <img src="{{ reservation.accommodation.image.url }}" width="100" height="100">
+                {{ reservation }}
                 <span>
                     <a href={% url 'reservations_view' id=reservation.id %} class="btn btn-detail">Ver</a> 
                     <a href={% url 'invoice' id=reservation.id %} class="btn btn-detail">Visualizar Factura</a> 
-                    <a  href={% url 'reservations_edit' id=reservation.id %}  class="btn btn-edit">Editar</a>
                     <a  href={% url 'reservations_delete' id=reservation.id %} onclick="return confirm('¿Estás seguro de querer cancelar la reserva?')" class="btn btn-delete">Cancelar Reserva</a>
                 </span>
             </li>
