@@ -63,10 +63,10 @@ def accommodations_list(request):
 
 
 
-def process_payment(payment_method, payment_details):
+def process_payment(payment_method):
     if payment_method == "at_hotel":
         # Si el pago se realizará en el hotel, no hace falta procesar el pago
-        return "Pago Pendiente"
+        return "Pendiente"
     else:
         # Si el pago se realizará con otro método, asumir que el pago ha sido exitoso
         return "Pagado"
@@ -80,9 +80,8 @@ def reserve(request, pk):
         form = PaymentForm(request.POST)
         if form.is_valid():
             payment_method = form.cleaned_data["payment_method"]
-            payment_details = form.cleaned_data["payment_details"]
             # Procesar el pago utilizando la función process_payment
-            status = process_payment(payment_method, payment_details)
+            status = process_payment(payment_method)
             start_date = form.cleaned_data["start_date"]
             end_date = form.cleaned_data["end_date"]
             if not accommodation.is_available(start_date, end_date):
@@ -100,9 +99,16 @@ def reserve(request, pk):
                 # Recuperamos el precio del alojamiento y calculamos el precio total de la reserva
                 total_price=total_price,
                 # Guardar el status de la reserva según el resultado del procesamiento del pago
-                status=status
             )
             reservation.save()
+            # Crear una instancia del modelo Payment
+            payment = Payment(
+                reservation=reservation,
+                payment_method=payment_method,
+                amount=total_price,
+                status=status
+            )
+            payment.save()
             messages.success(request, "Reserva realizada con éxito.")
             return redirect("reservations")
     else:
@@ -112,7 +118,8 @@ def reserve(request, pk):
 
 @login_required
 def invoice(request, id):
-    payment = get_object_or_404(Payment, id=id)
+    reservation = get_object_or_404(Reservation, id=id)
+    payment = Payment.objects.get(reservation=reservation)
     reservation = payment.reservation
     number_of_nights = (reservation.end_date - reservation.start_date).days
     net_total_price = (reservation.total_price / Decimal(1.21))
