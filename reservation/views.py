@@ -66,7 +66,7 @@ def accommodations_list(request):
 def process_payment(payment_method):
     if payment_method == "at_hotel":
         # Si el pago se realizará en el hotel, no hace falta procesar el pago
-        return "Pago Pendiente"
+        return "Pendiente"
     else:
         # Si el pago se realizará con otro método, asumir que el pago ha sido exitoso
         return "Pagado"
