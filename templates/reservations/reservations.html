@@ -12,7 +12,11 @@
         {% if reservation.user == request.user %}
             <li>
                 <img src="{{ reservation.accommodation.image.url }}" width="100" height="100">
-                {{ reservation }}
+                <div class="list-item">
+                    <p><strong>Alojamiento:</strong> {{ reservation.accommodation.name }}</p>
+                    <p><strong>Fecha de entrada:</strong> {{ reservation.start_date }}</p>
+                    <p><strong>Fecha de salida:</strong> {{ reservation.end_date }}</p>
+                </div>
                 <span>
                     <a href={% url 'reservations_view' id=reservation.id %} class="btn btn-detail">Ver</a> 
                     <a href={% url 'invoice' id=reservation.id %} class="btn btn-detail">Visualizar Factura</a> 

@@ -3,9 +3,9 @@ from .views import process_payment
 
 class PaymentTestCase(TestCase):
 
-    def test_process_payment_at_hotel(self):
+    def test_process_payment_en_hotel(self):
         # Testear el caso en el que el pago se realiza en el hotel
-        payment_method = "at_hotel"
+        payment_method = "en_hotel"
         payment_details = "Pago en efectivo al llegar al hotel"
         result = process_payment(payment_method, payment_details)
         self.assertEqual(result, "Pago Pendiente")

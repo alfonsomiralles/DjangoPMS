@@ -13,27 +13,27 @@ class ReservationForm(forms.ModelForm):
         self.fields['end_date'].widget = forms.DateInput(attrs={'type': 'date'})
 
 class SearchForm(forms.Form):
-    start_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}), required=False)
-    end_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}),required=False) 
-    country = forms.ModelChoiceField(
+    fecha_inicio = forms.DateField(widget=DateInput(attrs={'type': 'date'}), required=False)
+    fecha_fin = forms.DateField(widget=DateInput(attrs={'type': 'date'}),required=False) 
+    pais = forms.ModelChoiceField(
         queryset=Country.objects.all(),
         required=False,
         empty_label="Mostrar Todos"
     )
-    city = forms.ModelChoiceField(
+    ciudad = forms.ModelChoiceField(
         queryset=City.objects.all(),
         required=False,
         empty_label="Mostrar Todas"
     )
 
 class PaymentForm(forms.Form):
-    payment_method = forms.ChoiceField(choices=[
-        ('credit_card', 'Credit Card'),
-        ('debit_card', 'Debit Card'),
-        ('bank_transfer', 'Bank Transfer'),
-        ('at_hotel', 'Pay at Hotel')
+    metodo_de_pago = forms.ChoiceField(choices=[
+        ('tarjeta_credito', 'Tarjeta de Crédito'),
+        ('tarjeta_debito', 'Tarjeta de Débito'),
+        ('transferencia_bancaria', 'Transferencia Bancaria'),
+        ('en_hotel', 'Pago en Hotel')
     ])
-    start_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
-    end_date = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    fecha_inicio = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
+    fecha_fin = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
 
   
