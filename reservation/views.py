@@ -30,10 +30,10 @@ def search_results(request):
     if request.method == "POST":
         form = SearchForm(request.POST)
         if form.is_valid():
-            start_date = form.cleaned_data["start_date"]
-            end_date = form.cleaned_data["end_date"]
-            country = form.cleaned_data["country"]
-            city = form.cleaned_data["city"]
+            start_date = form.cleaned_data["fecha_inicio"]
+            end_date = form.cleaned_data["fecha_fin"]
+            country = form.cleaned_data["pais"]
+            city = form.cleaned_data["ciudad"]
             # Filtrar los alojamientos disponibles en el rango de fechas especificado
             if start_date and end_date:
                 reservations = Reservation.objects.filter(
@@ -64,7 +64,7 @@ def accommodations_list(request):
 
 
 def process_payment(payment_method):
-    if payment_method == "at_hotel":
+    if payment_method == "en_hotel":
         # Si el pago se realizará en el hotel, no hace falta procesar el pago
         return "Pendiente"
     else:
@@ -79,11 +79,11 @@ def reserve(request, pk):
     if request.method == "POST":
         form = PaymentForm(request.POST)
         if form.is_valid():
-            payment_method = form.cleaned_data["payment_method"]
+            payment_method = form.cleaned_data["metodo_de_pago"]
             # Procesar el pago utilizando la función process_payment
             status = process_payment(payment_method)
-            start_date = form.cleaned_data["start_date"]
-            end_date = form.cleaned_data["end_date"]
+            start_date = form.cleaned_data["fecha_inicio"]
+            end_date = form.cleaned_data["fecha_fin"]
             if not accommodation.is_available(start_date, end_date):
                 messages.error(request, "Lo sentimos, este alojamiento no está disponible en esas fechas.")
                 return redirect("accommodations")
