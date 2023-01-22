@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 
@@ -37,9 +38,12 @@ class Accommodation(models.Model):
 
     def is_available(self, start_date, end_date):
         reservations = Reservation.objects.filter(accommodation=self)
-        for reservation in reservations:
-            if (start_date >= reservation.start_date and start_date <= reservation.end_date) or (end_date >= reservation.start_date and end_date <= reservation.end_date):
-                return False
+        if (start_date < datetime.now().date()):
+            return False
+        else:
+            for reservation in reservations:
+                if (start_date >= reservation.start_date and start_date <= reservation.end_date) or (end_date >= reservation.start_date and end_date <= reservation.end_date):
+                    return False
         return True   
 
 class Reservation(models.Model):

@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import ReservationForm, PaymentForm, SearchForm
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
+from django.db.models import Sum
+
 
 # Create your views here.
 
@@ -179,3 +181,19 @@ def reservations_list(request):
         'accommodations': accommodations,
         'reservations': reservations,
     })
+
+@login_required
+def dashboard(request):
+    # Numero de reservas
+    reservations = Reservation.objects.filter(accommodation__user=request.user).count()
+    # Numero de alojamientos creados
+    accommodations = Accommodation.objects.filter(user=request.user).count()
+    # Numero de reservas realizadas por el usuario
+    user_reservations = Reservation.objects.filter(user=request.user).count()
+
+    context = {
+        'reservations': reservations,
+        'accommodations': accommodations,
+        'user_reservations': user_reservations,
+    }
+    return render(request, 'reservations/dashboard.html', context)
