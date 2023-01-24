@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
-from .models import Accommodation
-from .forms import AccommodationForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Accommodation, Price
+from .forms import AccommodationForm, PriceForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -54,6 +54,30 @@ def edit(request, id):
             'id':id
         }
     return render(request, 'accommodations/edit.html', context)
+
+@login_required
+def price_edit(request, id):
+    accommodation = get_object_or_404(Accommodation, id=id)
+    prices = Price.objects.filter(accommodation=accommodation)
+    if request.method == 'POST':
+        form = PriceForm(request.POST)
+        if form.is_valid():
+            start_date = form.cleaned_data['start_date']
+            end_date = form.cleaned_data['end_date']
+            price = form.cleaned_data['price']
+            # Verifica si ya existe un precio para esas fechas
+            existing_price = Price.objects.filter(accommodation=accommodation, start_date=start_date, end_date=end_date).first()
+            if existing_price:
+                existing_price.price = price
+                existing_price.save()
+            else:
+                new_price = Price(accommodation=accommodation, start_date=start_date, end_date=end_date, price=price)
+                new_price.save()
+            messages.success(request, 'Precio actualizado')
+            return redirect('accommodation')
+    else:
+        form = PriceForm()
+    return render(request, 'accommodations/price_edit.html', {'form': form, 'prices': prices, 'accommodation': accommodation})   
 
 class AccommodationCreate(LoginRequiredMixin,CreateView):
     model = Accommodation

@@ -17,10 +17,11 @@
                     <p><strong>Fecha de entrada:</strong> {{ reservation.start_date }}</p>
                     <p><strong>Fecha de salida:</strong> {{ reservation.end_date }}</p>
                 </div>
-                <span>
+                <span> 
                     <a href={% url 'reservations_view' id=reservation.id %} class="btn btn-detail">Ver</a> 
                     <a href={% url 'invoice' id=reservation.id %} class="btn btn-detail">Visualizar Factura</a> 
                     <a  href={% url 'reservations_delete' id=reservation.id %} onclick="return confirm('¿Estás seguro de querer cancelar la reserva?')" class="btn btn-delete">Cancelar Reserva</a>
+                    <a href={% url 'leave_review' id=reservation.id %} class="btn btn-edit">Publicar Reseña</a>
                 </span>
             </li>
     

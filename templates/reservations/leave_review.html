@@ -1,0 +1,24 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Reseña{% endblock 'title' %}
+
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+<div class="container">
+    <h1>Reseña</h1>
+    <span class="btn-back"><a href="{% url 'reservations' %}">Volver atrás</a></span>
+    <form method="post">
+        {% csrf_token %}
+        <div class="hotel-info">
+            <p>Hotel: {{ accommodation }}</p>
+        </div>
+        {{ form.as_p }}
+        <br>
+        <button type="submit" class="btn btn-reserve">Enviar Reseña</button>
+    </form>
+</div>
+{% endblock 'content' %}
