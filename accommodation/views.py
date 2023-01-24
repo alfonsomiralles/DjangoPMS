@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.http import require_safe
 
 # Create your views here.
 
@@ -56,6 +57,7 @@ def edit(request, id):
     return render(request, 'accommodations/edit.html', context)
 
 @login_required
+@require_safe
 def price_edit(request, id):
     accommodation = get_object_or_404(Accommodation, id=id)
     prices = Price.objects.filter(accommodation=accommodation)
