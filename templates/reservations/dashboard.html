@@ -1,0 +1,12 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Cuadro de Mando {% endblock 'title' %}
+
+{% block 'content' %}
+<h1>Cuadro de Mando</h1>
+<ul class="list">
+   <li><b>Número de reservas en mis alojamientos: </b>{{ reservations }}</li>
+   <li><b>Número de alojamientos creados: </b>{{ accommodations }}</li>
+   <li><b>Número de reservas realizadas por mi: </b>{{ user_reservations }}</li>
+</ul>
+{% endblock 'content' %}

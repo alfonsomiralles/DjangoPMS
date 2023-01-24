@@ -1,0 +1,23 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Editar Precios{% endblock 'title' %}
+
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <h1>Editar precios por fecha</h1>
+    <span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
+    <form  method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+            <div class="btn-wrapper">
+                <input type="submit" value="Guardar" class="btn-save" />
+            </div>
+        
+    </form>
+{% endblock 'content' %}

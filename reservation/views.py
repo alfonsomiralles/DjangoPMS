@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from accommodation.models import Accommodation, Reservation, Payment
+from accommodation.models import Accommodation, Reservation, Payment, Price, Review
 from django.contrib import messages
-from .forms import ReservationForm, PaymentForm, SearchForm
+from .forms import PaymentForm, SearchForm, ReviewForm
 from django.contrib.auth.decorators import login_required
 from decimal import Decimal
+from datetime import date
+from django.db.models import Avg
+
 
 # Create your views here.
 
@@ -52,10 +55,18 @@ def search_results(request):
     }
     return render(request, 'accommodations/list.html', context)
 
+@login_required
+def reserve_search(request):
+    active_accommodations = Accommodation.objects.filter(
+        name__contains=request.GET.get('search', ''))
+    context = {
+        'accommodations': active_accommodations,
+    }
+    return render(request, 'accommodations/list.html', context)    
 
 @login_required
 def accommodations_list(request):
-    active_accommodations = Accommodation.objects.filter(is_active=True)
+    active_accommodations = Accommodation.objects.filter(is_active=True).annotate(average_rating=Avg('review__rating'))
     context = {
         'accommodations': active_accommodations
     }
@@ -87,8 +98,8 @@ def reserve(request, pk):
             if not accommodation.is_available(start_date, end_date):
                 messages.error(request, "Lo sentimos, este alojamiento no está disponible en esas fechas.")
                 return redirect("accommodations")
-            # Recuperamos el precio del alojamiento y calculamos el precio total de la reserva
-            price = accommodation.price
+            # Utilizar el método get_price para obtener el precio correcto
+            price = accommodation.default_price
             total_price = price * (end_date - start_date).days    
             # Crear una instancia del modelo Reservation
             reservation = Reservation(
@@ -96,9 +107,7 @@ def reserve(request, pk):
                 end_date=end_date,
                 accommodation=accommodation,
                 user=request.user,
-                # Recuperamos el precio del alojamiento y calculamos el precio total de la reserva
                 total_price=total_price,
-                # Guardar el status de la reserva según el resultado del procesamiento del pago
             )
             reservation.save()
             # Crear una instancia del modelo Payment
@@ -113,7 +122,7 @@ def reserve(request, pk):
             return redirect("reservations")
     else:
         form = PaymentForm()
-    return render(request, "reservations/reserve.html", {"form": form, "payment_form": payment_form, "accommodation": accommodation})
+    return render(request, "reservations/reserve.html", {"form": form, "payment_form": payment_form, "accommodation": accommodation,})
 
 
 @login_required
@@ -132,6 +141,31 @@ def invoice(request, id):
         'iva': iva,
     }
     return render(request, 'reservations/invoice.html', context)
+
+@login_required
+def leave_review(request, id):
+    reservation = get_object_or_404(Reservation, id=id)
+    # Comprobar que la fecha de hoy es superior a la fecha de salida antes de permitir la publicación de una reseña
+    if date.today() <= reservation.end_date:
+        messages.error(request, 'Solo puedes publicar una reseña cuando se complete la estancia')
+        return redirect('reservations')
+    if request.method == "POST":
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            # Guardar la reseña en la base de datos y asociarla con la reserva correspondiente
+            review = form.save(commit=False)
+            review.reservation = reservation
+            review.user = request.user
+            review.save()
+            messages.success(request, 'Reseña publicada')
+            return redirect('reservations')
+    else:
+        form = ReviewForm()
+    context = {
+        'form': form,
+        'reservation': reservation,
+    }
+    return render(request, 'reservations/leave_review.html', context)   
 
 
 @login_required
@@ -179,3 +213,19 @@ def reservations_list(request):
         'accommodations': accommodations,
         'reservations': reservations,
     })
+
+@login_required
+def dashboard(request):
+    # Numero de reservas
+    reservations = Reservation.objects.filter(accommodation__user=request.user).count()
+    # Numero de alojamientos creados
+    accommodations = Accommodation.objects.filter(user=request.user).count()
+    # Numero de reservas realizadas por el usuario
+    user_reservations = Reservation.objects.filter(user=request.user).count()
+
+    context = {
+        'reservations': reservations,
+        'accommodations': accommodations,
+        'user_reservations': user_reservations,
+    }
+    return render(request, 'reservations/dashboard.html', context)

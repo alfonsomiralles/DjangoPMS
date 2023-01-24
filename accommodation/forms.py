@@ -1,6 +1,7 @@
 from django.forms import ModelForm, TextInput
-from .models import Accommodation
-from django.contrib.auth.models import User
+from .models import Accommodation, Price
+from django import forms
+
 
 class AccommodationForm(ModelForm):
 
@@ -16,7 +17,7 @@ class AccommodationForm(ModelForm):
                 'mobile': 'Móvil',
                 'image': 'Imagen',
                 'is_active': 'Activo',
-                'price': 'Precio por noche',
+                'default_price': 'Precio noche por defecto',
                 'country': 'País',
                 'city': 'Ciudad',
                 'user': 'Usuario'
@@ -29,4 +30,17 @@ class AccommodationForm(ModelForm):
         #widgets = {'estimated_end': DateInput(attrs={'type':'date'}),}
             
 
-        
+class PriceForm(ModelForm):
+    class Meta:
+        model = Price
+        fields = ['start_date', 'end_date', 'price']
+        labels = {
+                'start_date': 'fecha_entrada',
+                'end_date': 'fecha_salida',
+                'price': 'Precio',
+                }
+
+    def __init__(self, *args, **kwargs):
+        super(PriceForm, self).__init__(*args, **kwargs)
+        self.fields['start_date'].widget = forms.DateInput(attrs={'type': 'date'})
+        self.fields['end_date'].widget = forms.DateInput(attrs={'type': 'date'})    

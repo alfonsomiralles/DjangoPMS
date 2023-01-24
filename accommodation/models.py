@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your models here.
 
@@ -27,7 +28,7 @@ class Accommodation(models.Model):
     mobile = models.CharField(max_length=12, blank=False, null=False)
     image = models.ImageField(blank=False, null=False, upload_to="images/")
     is_active = models.BooleanField(default=False)
-    price = models.DecimalField(max_digits=8, decimal_places=2)
+    default_price = models.DecimalField(max_digits=8, decimal_places=2)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -37,10 +38,31 @@ class Accommodation(models.Model):
 
     def is_available(self, start_date, end_date):
         reservations = Reservation.objects.filter(accommodation=self)
-        for reservation in reservations:
-            if (start_date >= reservation.start_date and start_date <= reservation.end_date) or (end_date >= reservation.start_date and end_date <= reservation.end_date):
-                return False
+        if (start_date < datetime.now().date()):
+            return False
+        else:
+            for reservation in reservations:
+                if (start_date >= reservation.start_date and start_date <= reservation.end_date) or (end_date >= reservation.start_date and end_date <= reservation.end_date):
+                    return False
         return True   
+
+    def get_price(self, start_date, end_date):
+        price = Price.objects.filter(accommodation=self, start_date__lte=start_date, end_date__gte=end_date).first()
+        if price:
+            return price.price
+        else:
+            # si no se encuentra un precio específico, devuelve el precio por defecto del alojamiento
+            return self.default_price    
+
+class Price(models.Model):
+    accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
+    start_date = models.DateField()
+    end_date = models.DateField()
+    price = models.DecimalField(max_digits=8, decimal_places=2)
+
+    def __str__(self):
+        return f'{self.accommodation} - {self.start_date} - {self.end_date} - {self.price}'
+      
 
 class Reservation(models.Model):
     accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
@@ -66,3 +88,17 @@ class Payment(models.Model):
 
     def __str__(self):
         return f'Pago realizado'                
+
+from django.db import models
+
+from django.db import models
+
+class Review(models.Model):
+    accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    title = models.CharField(max_length=255)
+    review = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
+

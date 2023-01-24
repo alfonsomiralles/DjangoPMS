@@ -15,7 +15,7 @@
         {% csrf_token %}
         <div class="hotel-info">
             <p>Hotel: {{ accommodation }}</p>
-            <p>Precio por noche: {{ accommodation.price|floatformat:2 }} €</p>
+            <p>Precio por noche: {{ accommodation.default_price|floatformat:2 }} €</p>
         </div>
         {{ form.as_p }}
         <br>

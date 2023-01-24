@@ -1,5 +1,5 @@
 from django import forms
-from accommodation.models import Reservation, Country, City
+from accommodation.models import Reservation, Country, City, Review
 from django.forms import DateInput
 
 class ReservationForm(forms.ModelForm):
@@ -36,4 +36,18 @@ class PaymentForm(forms.Form):
     fecha_inicio = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
     fecha_fin = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
 
-  
+from django import forms
+
+class ReviewForm(forms.ModelForm):
+    class Meta:
+        model = Review
+        fields = ['rating', 'title', 'review']
+        labels = {
+                'rating': 'calificación',
+                'title': 'titulo',
+                'review': 'reseña',
+                }
+
+    rating = forms.IntegerField(min_value=1, max_value=5)
+    title = forms.CharField(max_length=255)
+    review = forms.CharField(widget=forms.Textarea)  
