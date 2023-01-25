@@ -107,6 +107,7 @@ def delete(request, id):
     return redirect('accommodation')
 
 @login_required
+@require_safe
 def upload_images(request, id):
     accommodation = Accommodation.objects.get(id=id)
     if request.method == 'POST':
@@ -128,6 +129,8 @@ def upload_images(request, id):
     }
     return render(request, 'accommodations/upload_images.html', context)    
 
+@login_required
+@require_safe
 def view_images(request, id):
     accommodation = Accommodation.objects.get(id=id)
     images = Image.objects.filter(accommodation=accommodation)
