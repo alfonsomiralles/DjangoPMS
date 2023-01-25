@@ -12,7 +12,7 @@
     {% for accommodation in accommodations  %}
         {% if accommodation.user == request.user %}
             <li>
-                <img src="{{ accommodation.image.url }}" width="100" height="100">
+                <img src="{{ accommodation.default_image.url }}" width="100" height="100">
                 <p>Nombre del Hotel: {{ accommodation }}</p>
                 <span>
                     <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a> 

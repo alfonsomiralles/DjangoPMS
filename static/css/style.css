@@ -400,3 +400,15 @@ table.invoice tr:nth-child(even) {
     display: inline-block;
     vertical-align: top;
 }
+
+/* Estilos para galeria de imagenes */
+.img-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las imágenes se distribuyan en varias filas */
+    
+}
+
+.img-container img {
+    width: 30%; /* Tamaño de las imágenes */
+    margin: 10px; /* Espacio entre imágenes */
+}

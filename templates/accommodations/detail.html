@@ -5,7 +5,9 @@
 {% block 'content' %}
 
 <ul class="list">
-   <li><img src ="{{ accommodations.image.url }}"width="250" height="250"></li>
+   
+   <li><img src ="{{ accommodations.default_image.url }}"width="250" height="250">
+      <a href="{% url 'view_images' id=accommodations.id %}" class="btn btn-edit">Ver galería de imágenes</a></li>
    <li><b>Nombre: </b>{{ accommodations.name }}</li>
    <li><b>Descripción: </b>{{ accommodations.description }}</li>
    <li><b>Dirección: </b>{{ accommodations.address }}</li>
@@ -15,6 +17,6 @@
    <li><b>País: </b>{{ accommodations.country}}</li>
    <li><b>Ciudad: </b>{{ accommodations.city}}</li>
    <li><b>Publicado: </b>{{ accommodations.is_active}}</li>
-   <li><b>Precio por noche: </b>{{ accommodations.price}}</li>
+   <li><b>Precio por noche: </b>{{ accommodations.default_price|floatformat:2 }} €</li>
 </ul>
 {% endblock 'content' %}

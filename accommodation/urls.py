@@ -11,4 +11,6 @@ urlpatterns = [
     path('create/', AccommodationCreate.as_view(template_name='accommodations/create.html'), name='acc_create'),
     path('delete/<int:id>', views.delete, name='acc_delete'),
     path('price_edit/<int:id>', views.price_edit, name='price_edit'),
+    path('upload_images/<int:id>', views.upload_images, name='upload_images'),
+    path('view_images/<int:id>', views.view_images, name='view_images'),
 ]

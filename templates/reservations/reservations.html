@@ -11,7 +11,7 @@
     {% for reservation in reservations  %}
         {% if reservation.user == request.user %}
             <li>
-                <img src="{{ reservation.accommodation.image.url }}" width="100" height="100">
+                <img src="{{ reservation.accommodation.default_image.url }}" width="100" height="100">
                 <div class="list-item">
                     <p><strong>Alojamiento:</strong> {{ reservation.accommodation.name }}</p>
                     <p><strong>Fecha de entrada:</strong> {{ reservation.start_date }}</p>

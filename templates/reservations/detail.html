@@ -5,7 +5,8 @@
 {% block 'content' %}
 
 <ul class="list">
-   <li><img src ="{{ reservations.accommodation.image.url }}"width="250" height="250"></li>
+   <li><img src ="{{ reservations.accommodation.default_image.url }}"width="250" height="250">
+      <a href="{% url 'view_images' id=reservations.accommodation.id %}" class="btn btn-edit">Ver galería de imágenes</a></li>
    <li><b>Nombre del Hotel: </b>{{ reservations.accommodation.name }}</li>
    <li><b>Fecha de entrada: </b>{{ reservations.start_date }}</li>
    <li><b>Fecha de salida: </b>{{ reservations.end_date }}</li>

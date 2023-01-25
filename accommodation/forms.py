@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import Accommodation, Price
+from .models import Accommodation, Price, Image
 from django import forms
 
 
@@ -44,3 +44,11 @@ class PriceForm(ModelForm):
         super(PriceForm, self).__init__(*args, **kwargs)
         self.fields['start_date'].widget = forms.DateInput(attrs={'type': 'date'})
         self.fields['end_date'].widget = forms.DateInput(attrs={'type': 'date'})    
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        fields = ('image',) 
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'multiple': True})
+        }      

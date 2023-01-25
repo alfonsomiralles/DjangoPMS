@@ -10,6 +10,7 @@
 {% block 'content' %}
     <h1>Editar datos de Alojamiento</h1>
     <a href="{% url 'price_edit' id=id %}" class="btn btn-edit">Editar precios por fecha</a>
+    <a href="{% url 'upload_images' id=id %}" class="btn btn-edit">Añadir imágenes</a>
     <span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
     <form action="{% url 'acc_edit' id=id %}" method="POST">
         {% csrf_token %}
