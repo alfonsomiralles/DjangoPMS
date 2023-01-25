@@ -9,7 +9,7 @@
 <ul class="list">
     {% for accommodation in accommodations %}
         <li>
-        <img src="{{ accommodation.image.url }}" width="100" height="100" alt="Imagen del alojamiento">
+        <img src="{{ accommodation.default_image.url }}" width="100" height="100" alt="Imagen del alojamiento">
         <h2>{{ accommodation.name }}</h2>
         <p>Precio por noche: {{ accommodation.default_price }} €</p>
         <div class="star-rating" data-rating="{{ accommodation.average_rating }}"></div>

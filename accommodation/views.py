@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Accommodation, Price
-from .forms import AccommodationForm, PriceForm
+from .models import Accommodation, Price, Image
+from .forms import AccommodationForm, PriceForm, ImageForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -105,3 +105,38 @@ def delete(request, id):
     accommodations.delete()
     messages.success(request, 'Alojamiento borrado')
     return redirect('accommodation')
+
+@login_required
+@require_safe
+def upload_images(request, id):
+    accommodation = Accommodation.objects.get(id=id)
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.accommodation = accommodation
+            image.save()
+            messages.success(request, 'Imagen añadida')
+            return redirect(to='accommodation')
+        else:
+            messages.error(request, 'La imagen no ha podido ser añadida')
+            return redirect(to='accommodation')
+    else:
+        form = ImageForm()
+    context = {
+        'form':form,
+        'id':id
+    }
+    return render(request, 'accommodations/upload_images.html', context)    
+
+@login_required
+@require_safe
+def view_images(request, id):
+    accommodation = Accommodation.objects.get(id=id)
+    images = Image.objects.filter(accommodation=accommodation)
+    context = {
+        'accommodation': accommodation,
+        'images': images
+    }
+    return render(request, 'accommodations/view_images.html', context)
+

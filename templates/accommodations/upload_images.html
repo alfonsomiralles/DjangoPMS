@@ -1,0 +1,21 @@
+{% extends 'layout/base.html' %}
+ 
+{% block 'title' %}Imagenes{% endblock 'title' %}
+
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+    <h1>Añadir Imagenes</h1>
+    <a href="{% url 'view_images' id=id %}" class="btn btn-edit">Ver galería de imágenes</a></li>
+    <span class="btn-back"><a href="{% url 'accommodation' %}">Volver atrás</a></span>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="btn-wrapper">
+            <input type="submit" value="Guardar" class="btn-save" />
+        </div>
+    </form>
+{% endblock 'content' %}

@@ -26,7 +26,7 @@ class Accommodation(models.Model):
     email= models.EmailField()
     phone = models.CharField(max_length=12, blank=True, null=True)
     mobile = models.CharField(max_length=12, blank=False, null=False)
-    image = models.ImageField(blank=False, null=False, upload_to="images/")
+    default_image = models.ImageField(blank=False, null=False, upload_to="images/")
     is_active = models.BooleanField(default=False)
     default_price = models.DecimalField(max_digits=8, decimal_places=2)
     country = models.ForeignKey(Country, on_delete=models.CASCADE)
@@ -53,6 +53,10 @@ class Accommodation(models.Model):
         else:
             # si no se encuentra un precio específico, devuelve el precio por defecto del alojamiento
             return self.default_price    
+
+class Image(models.Model):
+    accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='images/')            
 
 class Price(models.Model):
     accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
