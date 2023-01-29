@@ -1,6 +1,12 @@
 {% extends 'layout/base.html' %}
 
 {% block 'title' %}Resultados de la búsqueda{% endblock 'title' %}
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+{% endblock %}
+
 
 {% block 'content' %}
 <h1>Realiza una reserva</h1>
@@ -10,25 +16,23 @@
     {% for accommodation in accommodations %}
         <li>
         <img src="{{ accommodation.default_image.url }}" width="100" height="100" alt="Imagen del alojamiento">
-        <h2>{{ accommodation.name }}</h2>
-        <p>Precio por noche: {{ accommodation.default_price }} €</p>
+        <h3>{{ accommodation.name }}</h3>
+        <p>País: {{ accommodation.country }}</p>
+        <p>Ciudad: {{ accommodation.city}}</p>
         <div class="star-rating" data-rating="{{ accommodation.average_rating }}"></div>
-            <span>
-                <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a>
-                <a href={% url 'reserve' accommodation.id %} class="btn btn-reserve">Reservar</a> 
-            </span>
+        <br>
+        <span>
+            <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">
+                <i class="fa fa-eye">Ver</i>
+            </a>
+            <a href="{% url 'review_list' id=accommodation.id %}" class="btn btn-edit">
+                <i class="fa fa-star">Reseñas</i>
+            </a>
+            <a href={% url 'reserve' accommodation.id %} class="btn btn-reserve">
+                <i class="fa fa-calendar-check">Reservar</i>
+            </a> 
+        </span>
         </li>        
     {% endfor %}
-    <script>
-        $('.star-rating').raty({
-            readOnly: true,
-            score: function() {
-                return $(this).attr('data-rating');
-            },
-            starHalf: 'path/to/star-half.png',
-            starOff: 'path/to/star-off.png',
-            starOn: 'path/to/star-on.png'
-        });
-    </script>
 </ul>
 {% endblock 'content' %}

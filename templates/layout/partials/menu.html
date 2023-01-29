@@ -25,11 +25,20 @@
     {% if user.is_staff %}
     <li class="nav-item dropdown">
       <div class="dropdown">
-        Gestión de Alojamientos
+        <i class="fas fa-cog"></i>Gestión de Alojamientos
         <div class="dropdown-content">
-          <a href="{% url 'accommodation' %}">Mis alojamientos</a>
-          <a href="{% url 'reservations_list' %}">Reservas en mis alojamientos</a>
-          <a href="{% url 'dashboard' %}">Cuadro de Mando</a>
+          <a href="{% url 'accommodation' %}">
+            <i class="fas fa-hotel"></i>
+            Mis alojamientos
+          </a>
+          <a href="{% url 'reservations_list' %}">
+            <i class="fas fa-calendar-check"></i>
+            Reservas en mis alojamientos
+          </a>
+          <a href="{% url 'dashboard' %}">
+            <i class="fas fa-tachometer-alt"></i>
+            Cuadro de Mando
+          </a>
         </div>
       </div>
     </li>

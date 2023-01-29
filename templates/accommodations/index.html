@@ -6,7 +6,14 @@
  {% block 'content' %}
  <h1>Alojamientos</h1>
  {% include 'accommodations/partials/search.html' %}
- <span class="aux-btns"><a href="{% url 'accommodation' %}">Ver todos</a><a href="{% url 'acc_create' %}">Añadir</a></span>
+ <span class="aux-btns">
+    <a href="{% url 'accommodation' %}">
+      <i class="fas fa-eye"></i> Ver todos
+    </a>
+    <a href="{% url 'acc_create' %}" style="background-color: green; color: white; padding: 5px 10px;">
+      <i class="fas fa-plus"></i> Crear nuevo alojamiento
+    </a>
+  </span>
  <ul class="list">
 
     {% for accommodation in accommodations  %}
@@ -15,9 +22,9 @@
                 <img src="{{ accommodation.default_image.url }}" width="100" height="100">
                 <p>Nombre del Hotel: {{ accommodation }}</p>
                 <span>
-                    <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail">Ver</a> 
-                    <a  href={% url 'acc_edit' id=accommodation.id %}  class="btn btn-edit">Editar</a>
-                    <a  href={% url 'acc_delete' id=accommodation.id %} onclick="return confirm('¿Estás seguro de querer borrar este alojamiento?')" class="btn btn-delete">Borrar</a>
+                    <a href={% url 'acc_view' id=accommodation.id %} class="btn btn-detail"><i class="fas fa-eye"></i>Ver</a> 
+                    <a  href={% url 'acc_edit' id=accommodation.id %}  class="btn btn-edit"><i class="fas fa-edit"></i>Editar</a>
+                    <a  href={% url 'acc_delete' id=accommodation.id %} onclick="return confirm('¿Estás seguro de querer borrar este alojamiento?')" class="btn btn-delete"><i class="fas fa-trash"></i>Borrar</a>
                 </span>
             </li>
     

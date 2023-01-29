@@ -22,9 +22,13 @@
         {% csrf_token %}
         <table>
             {{ form.as_table }}
+            <input type="hidden" name="custom_city" id="custom_city">
+            <input type="hidden" name="custom_country" id="custom_country">
         </table>
         <div class="btn-wrapper">
             <input type="submit" value="Enviar" class="btn-send" />
         </div>
     </form>
 {% endblock 'content' %}
+{% block 'scripts' %}
+{% endblock %}

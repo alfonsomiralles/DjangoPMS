@@ -2,9 +2,7 @@ from django.forms import ModelForm, TextInput
 from .models import Accommodation, Price, Image
 from django import forms
 
-
 class AccommodationForm(ModelForm):
-
     class Meta:
         model = Accommodation
         fields = '__all__'
@@ -26,8 +24,6 @@ class AccommodationForm(ModelForm):
         widgets = {
             'user': TextInput(attrs={'readonly': 'readonly'})
         }
-        #exclude = ('date',)
-        #widgets = {'estimated_end': DateInput(attrs={'type':'date'}),}
             
 
 class PriceForm(ModelForm):
