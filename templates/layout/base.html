@@ -8,7 +8,10 @@
     <title>PMS | {% block 'title' %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block 'styles' %}
-    {% endblock  %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    {% endblock %}
 </head>
 <body>
     {% include 'layout/partials/menu.html' %}
@@ -29,4 +32,5 @@
     {% block 'scripts' %}
     {% endblock  %}
 </body>
+    
 </html>

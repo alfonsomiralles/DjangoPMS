@@ -93,10 +93,6 @@ class Payment(models.Model):
     def __str__(self):
         return f'Pago realizado'                
 
-from django.db import models
-
-from django.db import models
-
 class Review(models.Model):
     accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE)
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE)
@@ -106,3 +102,5 @@ class Review(models.Model):
     review = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.title

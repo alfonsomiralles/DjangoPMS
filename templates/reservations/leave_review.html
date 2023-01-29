@@ -14,7 +14,7 @@
     <form method="post">
         {% csrf_token %}
         <div class="hotel-info">
-            <p>Hotel: {{ accommodation }}</p>
+            <p>Hotel: {{ reservation.accommodation }}</p>
         </div>
         {{ form.as_p }}
         <br>

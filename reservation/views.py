@@ -156,6 +156,7 @@ def leave_review(request, id):
             review = form.save(commit=False)
             review.reservation = reservation
             review.user = request.user
+            review.accommodation = reservation.accommodation #Aquí estableces la relación con la columna "accommodation_id"
             review.save()
             messages.success(request, 'Reseña publicada')
             return redirect('reservations')
@@ -165,8 +166,21 @@ def leave_review(request, id):
         'form': form,
         'reservation': reservation,
     }
-    return render(request, 'reservations/leave_review.html', context)   
+    return render(request, 'reservations/leave_review.html', context) 
 
+@login_required  
+def review_list(request,id):
+    accommodation = get_object_or_404(Accommodation, id=id)
+    reviews = Review.objects.filter(accommodation=accommodation)
+    if not reviews:
+        message = "No hay reseñas publicadas todavía."
+    else:
+        message = ""
+    context = {
+        'reviews': reviews, 
+        'message': message,
+        'accommodation':accommodation}
+    return render(request, 'reservations/review_list.html', context)
 
 @login_required
 def reservations(request):

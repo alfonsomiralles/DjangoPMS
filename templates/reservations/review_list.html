@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% block 'title' %}Reseñas{% endblock 'title' %}
+{% block 'styles' %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block 'content' %}
+<h1>Reseñas</h1>
+<span class="aux-btns"><a href="{% url 'accommodationslist' %}">Volver</a></span>
+<h1>{{ message }}</h1>
+<ul class="list">
+    {% for review in reviews %}
+        <li>
+            <div class="review-header">
+                <img src="{{ review.accommodation.default_image.url }}" width="100" height="100" alt="Imagen del alojamiento">
+                <h3 class="review-accommodation-name">{{ review.accommodation.name }}</h3>
+                <div class="star-rating"></div>
+              </div>
+            <div class="review-content">
+                <p class="review-title">Calificación: <span class="review-info">{{ review.rating }}</span></p>
+                <p class="review-title">Título: <span class="review-info">{{ review.title }}</span></p>
+                <p class="review-title">Reseña: <span class="review-info">{{ review.review }}</span></p>
+                <p class="review-title">Fecha de publicación: <span class="review-info">{{ review.date_created }}</span></p>
+            </div>
+            <hr>
+        </li>        
+    {% endfor %}
+</ul>
+{% endblock 'content' %}

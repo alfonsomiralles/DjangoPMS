@@ -14,5 +14,5 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('reserve_search/', views.reserve_search, name='reserve_search'),
     path('leave_review/<int:id>/', views.leave_review, name='leave_review'),
-
+    path('review_list/<int:id>/', views.review_list, name='review_list'),
 ]
