@@ -1,29 +1,24 @@
 from django.contrib import admin
 
-from .models import Accommodation,City, Country, Reservation, Payment, Review, Image
+from .models import Accommodation,City, Country, Image
 
 # Register your models here.
 
 class AccommodationAdmin(admin.ModelAdmin):
-    list_display = ['name', 'country', 'city', 'is_active', 'default_price']
-
-class ReservationAdmin(admin.ModelAdmin):
-    list_display = ('accommodation', 'user', 'start_date', 'end_date', 'total_price')
-
-class PaymentAdmin(admin.ModelAdmin):
-    list_display = ('reservation', 'payment_method', 'amount')
-
-class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('accommodation', 'user', 'rating', 'review', 'date_created')    
+    list_display = ['name', 'country', 'city', 'is_active', 'default_price', 'user']   
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display = ('accommodation', 'image')       
+    list_display = ('accommodation', 'image')      
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = ('name', 'postcode','country')       
+
+class CountryAdmin(admin.ModelAdmin):
+    list_display = ('country_name', 'country_code')  
 
 admin.site.register(Accommodation, AccommodationAdmin)
-admin.site.register(Country)
-admin.site.register(City)
-admin.site.register(Reservation, ReservationAdmin)
-admin.site.register(Payment, PaymentAdmin)
-admin.site.register(Review, ReviewAdmin)
+admin.site.register(Country, CountryAdmin)
+admin.site.register(City,CityAdmin)
 admin.site.register(Image, ImageAdmin)
+
 

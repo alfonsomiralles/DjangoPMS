@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.decorators.http import require_safe
+from django.views.decorators.http import require_http_methods, require_safe
 
 # Create your views here.
 
@@ -57,7 +57,7 @@ def edit(request, id):
     return render(request, 'accommodations/edit.html', context)
 
 @login_required
-@require_safe
+@require_http_methods(["GET", "POST"])
 def price_edit(request, id):
     accommodation = get_object_or_404(Accommodation, id=id)
     prices = Price.objects.filter(accommodation=accommodation)
@@ -107,7 +107,7 @@ def delete(request, id):
     return redirect('accommodation')
 
 @login_required
-@require_safe
+@require_http_methods(["GET", "POST"])
 def upload_images(request, id):
     accommodation = Accommodation.objects.get(id=id)
     if request.method == 'POST':
@@ -117,10 +117,10 @@ def upload_images(request, id):
             image.accommodation = accommodation
             image.save()
             messages.success(request, 'Imagen añadida')
-            return redirect(to='accommodation')
+            return redirect('accommodation')
         else:
             messages.error(request, 'La imagen no ha podido ser añadida')
-            return redirect(to='accommodation')
+            return redirect('accommodation')
     else:
         form = ImageForm()
     context = {
