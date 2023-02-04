@@ -1,5 +1,6 @@
 from django import forms
-from accommodation.models import Reservation, Country, City, Review
+from accommodation.models import Country, City
+from reservation.models import Reservation, Review
 from django.forms import DateInput
 
 class ReservationForm(forms.ModelForm):

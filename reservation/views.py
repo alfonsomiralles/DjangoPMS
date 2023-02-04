@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from accommodation.models import Accommodation, Reservation, Payment, Price, Review
+from accommodation.models import Accommodation, Price
+from reservation.models import Payment, Review, Reservation
 from django.contrib import messages
 from .forms import PaymentForm, SearchForm, ReviewForm
 from django.contrib.auth.decorators import login_required
@@ -41,8 +42,7 @@ def search_results(request):
             if start_date and end_date:
                 reservations = Reservation.objects.filter(
                     start_date__lte=end_date, end_date__gte=start_date)
-                accommodations = accommodations.filter(
-                    reservation__in=reservations)
+                accommodations = accommodations.exclude(reservation__in=reservations)
             if country:
                 accommodations = accommodations.filter(country=country)
             if city:
@@ -95,7 +95,7 @@ def reserve(request, pk):
             status = process_payment(payment_method)
             start_date = form.cleaned_data["fecha_inicio"]
             end_date = form.cleaned_data["fecha_fin"]
-            if not accommodation.is_available(start_date, end_date):
+            if not Reservation.is_available(accommodation, start_date, end_date):
                 messages.error(request, "Lo sentimos, este alojamiento no está disponible en esas fechas.")
                 return redirect("accommodations")
             # Utilizar el método get_price para obtener el precio correcto
@@ -228,18 +228,4 @@ def reservations_list(request):
         'reservations': reservations,
     })
 
-@login_required
-def dashboard(request):
-    # Numero de reservas
-    reservations = Reservation.objects.filter(accommodation__user=request.user).count()
-    # Numero de alojamientos creados
-    accommodations = Accommodation.objects.filter(user=request.user).count()
-    # Numero de reservas realizadas por el usuario
-    user_reservations = Reservation.objects.filter(user=request.user).count()
 
-    context = {
-        'reservations': reservations,
-        'accommodations': accommodations,
-        'user_reservations': user_reservations,
-    }
-    return render(request, 'reservations/dashboard.html', context)
