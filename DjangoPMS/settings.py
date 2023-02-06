@@ -147,14 +147,16 @@ LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
 
-EMAIL_BACKEND = config('EMAIL_BACKEND')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_USE_TLS = config('EMAIL_USE_TLS')
-EMAIL_USE_SSL = config('EMAIL_USE_SSL')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+os.environ.get('EMAIL_HOST_PASSWORD', default='your EMAIL_HOST_PASSWORD')
+
+EMAIL_BACKEND = os.environ.get('EMAIL_BACKEND', default='your EMAIL_BACKEND')
+EMAIL_HOST = os.environ.get('EMAIL_HOST', default='your EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', default='your EMAIL_PORT')
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', default='your EMAIL_USE_TLS')
+EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', default='your EMAIL_USE_SSL')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', default='your EMAIL_HOST_USER')
 #EMAIL_HOST_PASSWORD = 'pmsdjango22*-'
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', default='your EMAIL_HOST_PASSWORD')
 #EMAIL_FILE_PATH = BASE_DIR / "static" / "emails"
 
 
