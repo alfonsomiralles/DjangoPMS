@@ -37,6 +37,16 @@ python manage.py runserver
 # to create a superuser for Django Admin Panel
 python manage.py createsuperuser
 
+# Testing
+python -m pytest
+#coverage testing reports for all the project
+python -m pytest --cov
+#coverage testing reports for specific app
+python -m pytest --cov="app_name" tests/
+#coverage testing report in html. This generate a new folder "htmlcov" with all the files and you need to open index.html from file explorer to open it in a browser
+python -m pytest --cov-report html --cov=./
+
+
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
