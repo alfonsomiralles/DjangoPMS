@@ -85,7 +85,7 @@ WSGI_APPLICATION = 'DjangoPMS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', default='your DB_ENGINE'),
+        'ENGINE': os.environ.get('DB_ENGINE', default='django.db.backends.mysql'),
         'NAME': os.environ.get('DB_NAME', default='your DB_NAME'),
         'USER': os.environ.get('DB_USER', default='your DB_USER'),
         'PASSWORD': os.environ.get('DB_PASSWORD', default='your DB_PASSWORD'),
