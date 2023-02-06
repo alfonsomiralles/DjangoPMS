@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_seed',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -154,4 +155,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 #EMAIL_FILE_PATH = BASE_DIR / "static" / "emails"
 
 
-
+GRAPH_MODELS = {
+  'all_applications': True,
+  'group_models': True,
+}
