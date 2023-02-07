@@ -85,12 +85,12 @@ WSGI_APPLICATION = 'DjangoPMS.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('DB_ENGINE', default='django.db.backends.mysql'),
-        'NAME': os.environ.get('DB_NAME', default='your DB_NAME'),
-        'USER': os.environ.get('DB_USER', default='your DB_USER'),
-        'PASSWORD': os.environ.get('DB_PASSWORD', default='your DB_PASSWORD'),
-        'HOST': os.environ.get('DB_HOST', default='your DB_HOST'),
-        'PORT': os.environ.get('DB_PORT', default='your DB_PORT'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'pms1',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
     }
 }
 
