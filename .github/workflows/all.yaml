@@ -1,0 +1,15 @@
+name: 0 - Run Everything
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  test_django:
+    uses: ./.github/workflows/django.yaml
+    secrets:
+    DJANGO_SECRET_KEY: "${{ secrets.DJANGO_SECRET_KEY}}"
+  build_django:
+    needs: test_django
+    uses: ./.github/workflows/container.yaml   
