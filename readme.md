@@ -1,57 +1,24 @@
 # Django Project - PMS
 
-This is a Django project
+The DjangoPMS application is a rental property management system based on Django. It provides functionalities for managing users, accommodations, reservations, and a dashboard.
+The application utilizes Django, a high-level web development framework, and Python, a powerful and user-friendly programming language. It provides an intuitive user interface and robust functionalities to facilitate rental property management.
+To run the application, ensure you have Python and Django installed. You can use the python manage.py runserver command to start the development server and access the application in your web browser.
 
-## Installation
+## key features:
+# User Registration
+Users can register in the application by providing a username and password. Validations are performed to ensure valid credentials are entered.
 
-Use this to install Django
+# User Profile
+Users can view and edit their profile, including their first name, last name, and email address.
 
-```bash
-python -m pip install Django
-```
+# Starf Users
+Staff users can create new accomodations, view reservations in their accommodations, update reservations, etc
 
-## Usage
+# Accommodations
+Users can add, edit, and delete accommodations in the system. Each accommodation has information such as title, description, location, price, and capacity.
 
-```python
-# to create the project
-django-admin startproject <name of the project>
+# Reservations:
+Users can make reservations for available accommodations. Availability of the accommodation is validated, and success or error messages are generated 
 
-# into the project folder, to init the database
-python manage.py migrate
-
-# If we want to create an app, instead of the previous step we will use
-python manage.py startapp <name of the app>
-# Then, into the settings.py add the <name of the app> into the INSTALLED_APPS directory. To check if everything is correct
-python manage.py check <name of the app>
-# If we do any changes in models.py we need to check and create the table in the database with
-python manage.py makemigrations
-python manage.py migrate
-
-# I will use django-seed to seed the database with fake information. This is the github of the library
-https://github.com/Brobin/django-seed
-
-# to init the server
-python manage.py runserver
-
-
-# to create a superuser for Django Admin Panel
-python manage.py createsuperuser
-
-# Testing
-python -m pytest
-#coverage testing reports for all the project
-python -m pytest --cov
-#coverage testing reports for specific app
-python -m pytest --cov="app_name" tests/
-#coverage testing report in html. This generate a new folder "htmlcov" with all the files and you need to open index.html from file explorer to open it in a browser
-python -m pytest --cov-report html --cov=./
-
-
-```
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
-
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
+# Dashboard: 
+Users with administrator roles have access to a dashboard that allows them to view statistics, generate reports, and perform administrative actions on the platform.
